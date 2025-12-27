@@ -1,26 +1,32 @@
-import type React from "react"
-import type { Metadata } from "next"
+import type React from "react";
+import type { Metadata } from "next";
 
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
+import { Analytics } from "@vercel/analytics/next";
+import "./globals.css";
 
-import { Geist, Geist_Mono, Playfair_Display as V0_Font_Playfair_Display } from "next/font/google"
+import {
+  Geist,
+  Geist_Mono,
+  Playfair_Display as V0_Font_Playfair_Display,
+} from "next/font/google";
 
 // Initialize fonts
-const _geist = Geist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] })
+const _geist = Geist({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 const _geistMono = Geist_Mono({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-})
+});
 const _playfairDisplay = V0_Font_Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
-})
+});
 
 export const metadata: Metadata = {
-  title: "LMS Admin Panel",
+  title: "Nexus ADMIN-ORG",
   description: "Enterprise Learning Management System Administration",
-  generator: "v0.app",
   icons: {
     icon: [
       {
@@ -38,19 +44,19 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-icon.png",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={`${_playfairDisplay.className} antialiased`}>
+      <body className={`${_geistMono.className} antialiased`}>
         {children}
         <Analytics />
       </body>
     </html>
-  )
+  );
 }
