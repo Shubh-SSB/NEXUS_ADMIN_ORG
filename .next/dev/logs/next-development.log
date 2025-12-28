@@ -1,15 +1,1131 @@
-[00:00:01.251] Server  LOG     
-[00:00:01.251] Server  LOG        We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
-[00:00:01.252] Server  LOG        The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+[00:00:01.709] Server  LOG      ✓ Ready in 1152ms
+[00:00:35.053] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:35.812] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:35.812] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:35.812] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766926790387}
+[00:01:34.951] Server  LOG      ✓ Compiled in 139ms
+[00:01:37.300] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:37.469] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 
-[00:00:01.252] Server  LOG        	- include was updated to add '.next/dev/types/**/*.ts'
-[00:00:01.252] Server  LOG     
-[00:00:01.253] Server  LOG        The following mandatory changes were made to your tsconfig.json:
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
 
-[00:00:01.253] Server  LOG        	- jsx was set to react-jsx (next.js uses the React automatic runtime)
-[00:00:01.253] Server  LOG     
-[00:00:01.599] Server  LOG      ✓ Ready in 1125ms
-[00:00:05.395] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:06.029] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:06.029] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:06.029] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766875740852}
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="page.tsx">
+                          <SegmentTrieNode>
+                          <RootPage>
+                            <div
++                             className="relative h-screen w-full"
+-                             className="h-screen w-screen items-center bg-foreground overflow-hidden"
+                            >
+                              <Login onLogin={function adminLogin}>
+                                <div
++                                 className="h-screen w-screen items-center bg-foreground overflow-hidden"
+-                                 className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+                                >
+                                  <div
++                                   className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+-                                   className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg f..."
+                                  >
++                                   <div
++                                     className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg..."
++                                   >
+-                                   <span className="text-white font-bold text-lg">
+                                    ...
+                                  ...
+                        ...
+                      ...
+          ...
+    ...
+
+[00:01:37.469] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:01:37.469] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:01:37.469] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:01:37.469] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766926852038}
+[00:01:37.469] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766926852038}
+[00:01:45.562] Server  LOG      ✓ Compiled in 74ms
+[00:01:51.021] Server  LOG      ✓ Compiled in 76ms
+[00:01:54.312] Server  LOG      ✓ Compiled in 85ms
+[00:02:03.532] Server  LOG      ✓ Compiled in 67ms
+[00:02:46.160] Server  LOG      ✓ Compiled in 142ms
+[00:02:48.968] Server  LOG      ✓ Compiled in 82ms
+[00:02:57.210] Server  LOG      ✓ Compiled in 87ms
+[00:03:03.682] Server  LOG      ✓ Compiled in 68ms
+[00:03:11.289] Server  LOG      ✓ Compiled in 79ms
+[00:03:21.447] Server  LOG      ✓ Compiled in 135ms
+[00:03:24.745] Server  LOG      ✓ Compiled in 108ms
+[00:03:34.333] Server  LOG      ✓ Compiled in 64ms
+[00:03:40.456] Server  LOG      ✓ Compiled in 59ms
+[00:04:19.468] Server  LOG      ✓ Compiled in 95ms
+[00:04:23.303] Server  LOG      ✓ Compiled in 70ms
+[00:04:44.043] Server  LOG      ✓ Compiled in 72ms
+[00:04:54.698] Server  LOG      ✓ Compiled in 112ms
+[00:05:00.980] Server  LOG      ✓ Compiled in 101ms
+[00:06:53.667] Server  LOG      ✓ Compiled in 139ms
+[00:07:02.362] Server  LOG      ✓ Compiled in 61ms
+[00:07:51.305] Server  LOG      ✓ Compiled in 141ms
+[00:08:03.120] Server  LOG      ✓ Compiled in 100ms
+[00:08:17.691] Server  LOG      ✓ Compiled in 177ms
+[00:08:50.975] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:51.168] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:08:51.168] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:08:51.168] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766927285736}
+[00:10:15.910] Server  LOG      ✓ Compiled in 89ms
+[00:10:22.448] Server  LOG      ✓ Compiled in 176ms
+[00:10:28.541] Server  LOG      ✓ Compiled in 83ms
+[00:15:15.752] Server  LOG      ✓ Compiled in 88ms
+[00:15:22.766] Server  LOG      ✓ Compiled in 78ms
+[00:15:51.918] Server  LOG      ✓ Compiled in 76ms
+[00:16:07.699] Server  LOG      ✓ Compiled in 64ms
+[00:16:53.861] Server  LOG      ✓ Compiled in 130ms
+[00:17:39.138] Server  LOG      ✓ Compiled in 173ms
+[00:21:25.543] Server  LOG      ✓ Compiled in 231ms
+[00:21:34.652] Server  LOG      ✓ Compiled in 176ms
+[00:21:52.280] Server  LOG      ✓ Compiled in 309ms
+[00:22:05.550] Server  LOG      ✓ Compiled in 67ms
+[00:22:29.514] Server  LOG      ✓ Compiled in 254ms
+[00:22:45.258] Server  LOG      ✓ Compiled in 93ms
+[00:24:08.875] Server  LOG      ✓ Compiled in 237ms
+[00:24:16.398] Server  LOG      ✓ Compiled in 176ms
+[00:25:53.487] Server  LOG      ✓ Compiled in 209ms
+[00:26:31.862] Server  LOG      ✓ Compiled in 109ms
+[00:26:52.282] Server  LOG      ✓ Compiled in 73ms
+[00:27:03.764] Server  LOG      ✓ Compiled in 113ms
+[00:27:13.876] Server  LOG      ✓ Compiled in 83ms
+[00:27:36.886] Server  LOG      ✓ Compiled in 119ms
+[00:27:51.705] Server  LOG      ✓ Compiled in 62ms
+[00:28:04.205] Server  LOG      ✓ Compiled in 61ms
+[00:28:08.728] Server  LOG      ✓ Compiled in 118ms
+[00:28:12.589] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:12.761] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="page.tsx">
+                          <SegmentTrieNode>
+                          <RootPage>
+                            <div
++                             className="relative h-screen w-full"
+-                             className="h-screen w-screen items-center bg-foreground overflow-hidden"
+                            >
+                              <Login onLogin={function adminLogin}>
+                                <div
++                                 className="h-screen w-screen items-center bg-foreground overflow-hidden"
+-                                 className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+                                >
+                                  <div
++                                   className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+-                                   className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg f..."
+                                  >
++                                   <div
++                                     className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg..."
++                                   >
+-                                   <span className="text-white font-bold text-lg">
+                                    ...
+                                  ...
+                        ...
+                      ...
+          ...
+    ...
+
+[00:28:12.761] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:28:12.761] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:28:12.761] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:28:12.761] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766928447335}
+[00:28:12.761] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766928447335}
+[00:28:56.278] Server  LOG      ✓ Compiled in 120ms
+[00:29:10.184] Server  LOG      ✓ Compiled in 74ms
+[00:29:21.390] Server  LOG      ✓ Compiled in 102ms
+[00:29:30.532] Server  LOG      ✓ Compiled in 121ms
+[00:29:53.250] Server  LOG      ✓ Compiled in 127ms
+[00:29:59.763] Server  LOG      ✓ Compiled in 147ms
+[00:30:20.117] Server  LOG      ✓ Compiled in 114ms
+[00:31:54.441] Server  LOG      ✓ Compiled in 128ms
+[00:32:05.839] Server  LOG      ✓ Compiled in 76ms
+[00:32:22.570] Server  LOG      ✓ Compiled in 133ms
+[00:32:32.163] Server  LOG      ✓ Compiled in 131ms
+[00:32:40.047] Server  LOG      ✓ Compiled in 71ms
+[00:32:42.117] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:32:42.286] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="page.tsx">
+                          <SegmentTrieNode>
+                          <RootPage>
+                            <div
++                             className="relative h-screen w-full"
+-                             className="h-screen w-screen items-center bg-foreground overflow-hidden"
+                            >
+                              <Login onLogin={function adminLogin}>
+                                <div
++                                 className="h-screen w-screen items-center bg-foreground overflow-hidden"
+-                                 className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+                                >
+                                  <div
++                                   className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+-                                   className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg f..."
+                                  >
++                                   <div
++                                     className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg..."
++                                   >
+-                                   <span className="text-white font-bold text-lg">
+                                    ...
+                                  ...
+                        ...
+                      ...
+          ...
+    ...
+
+[00:32:42.286] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:32:42.286] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:32:42.286] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:32:42.286] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766928716860}
+[00:32:42.286] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766928716860}
+[00:33:27.036] Server  LOG      ✓ Compiled in 97ms
+[00:33:29.748] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:33:29.917] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="page.tsx">
+                          <SegmentTrieNode>
+                          <RootPage>
+                            <div
++                             className="relative h-screen w-full"
+-                             className="h-screen w-screen items-center bg-foreground overflow-hidden"
+                            >
+                              <Login onLogin={function adminLogin}>
+                                <div
++                                 className="h-screen w-screen items-center bg-foreground overflow-hidden"
+-                                 className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+                                >
+                                  <div
++                                   className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+-                                   className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg f..."
+                                  >
++                                   <div
++                                     className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg..."
++                                   >
+-                                   <span className="text-white font-bold text-lg">
+                                    ...
+                                  ...
+                        ...
+                      ...
+          ...
+    ...
+
+[00:33:29.917] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:33:29.917] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:33:29.917] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:33:29.917] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766928764490}
+[00:33:29.918] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766928764490}
+[00:33:37.391] Server  LOG      ✓ Compiled in 153ms
+[00:33:53.049] Server  LOG      ✓ Compiled in 76ms
+[00:34:00.617] Server  LOG      ✓ Compiled in 62ms
+[00:34:02.225] Server  LOG      ✓ Compiled in 118ms
+[00:34:11.967] Server  LOG      ✓ Compiled in 142ms
+[00:34:51.667] Server  LOG      ✓ Compiled in 131ms
+[00:35:00.294] Server  LOG      ✓ Compiled in 130ms
+[00:35:49.124] Server  LOG      ✓ Compiled in 155ms
+[00:35:56.517] Server  LOG      ✓ Compiled in 112ms
+[00:35:57.144] Browser LOG     Something went wrong at our end. message
+[00:35:57.144] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[00:36:23.745] Server  LOG      ✓ Compiled in 121ms
+[00:36:29.495] Server  LOG      ✓ Compiled in 87ms
+[00:36:39.476] Server  LOG      ✓ Compiled in 71ms
+[00:36:43.528] Server  LOG      ✓ Compiled in 99ms
+[00:36:45.880] Server  LOG      ✓ Compiled in 82ms
+[00:38:31.733] Server  LOG      ✓ Compiled in 110ms
+[00:39:02.064] Server  LOG      ✓ Compiled in 76ms
+[00:39:02.328] Browser ERROR   ./components/ui/login-form.tsx:130:16
+Parsing ecmascript source code failed
+  128 |             )}
+  129 |           </button>
+> 130 |         </form>
+      |                ^
+> 131 |       </div>
+      | ^^^^^^^
+  132 |     </div>
+  133 |   );
+  134 | };
+
+Expected '</', got 'jsx text (
+      )'
+
+Import traces:
+  Client Component Browser:
+    ./components/ui/login-form.tsx [Client Component Browser]
+    ./components/ui/login.tsx [Client Component Browser]
+    ./components/ui/login.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ui/login-form.tsx [Client Component SSR]
+    ./components/ui/login.tsx [Client Component SSR]
+    ./components/ui/login.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+[00:39:24.581] Server  LOG      ✓ Compiled in 62ms
+[00:39:40.954] Server  LOG      ✓ Compiled in 148ms
+[00:39:44.957] Server  LOG      ✓ Compiled in 82ms
+[00:39:51.248] Server  LOG      ✓ Compiled in 94ms
+[00:41:20.410] Server  LOG      ✓ Compiled in 159ms
+[00:42:30.486] Server  LOG      ✓ Compiled in 91ms
+[00:43:07.303] Server  LOG      ✓ Compiled in 134ms
+[00:44:52.160] Server  LOG      ✓ Compiled in 128ms
+[00:45:12.090] Server  LOG      ✓ Compiled in 79ms
+[00:45:25.212] Server  LOG      ✓ Compiled in 158ms
+[00:46:05.397] Server  LOG      ✓ Compiled in 75ms
+[00:46:47.528] Browser LOG     Something went wrong at our end. message
+[00:46:47.528] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[00:47:16.854] Server  LOG      ✓ Compiled in 139ms
+[00:47:33.482] Server  LOG      ✓ Compiled in 118ms
+[00:47:54.158] Server  LOG      ✓ Compiled in 86ms
+[00:48:40.184] Server  LOG      ✓ Compiled in 147ms
+[00:48:49.373] Server  LOG      ✓ Compiled in 82ms
+[00:48:53.877] Server  LOG      ✓ Compiled in 143ms
+[00:49:01.557] Server  LOG      ✓ Compiled in 99ms
+[00:49:12.319] Server  LOG      ✓ Compiled in 95ms
+[00:49:24.251] Server  LOG      ✓ Compiled in 75ms
+[00:50:42.598] Server  LOG      ✓ Compiled in 125ms
+[00:51:08.236] Server  LOG      ✓ Compiled in 149ms
+[00:51:15.780] Server  LOG      ✓ Compiled in 86ms
+[00:51:23.458] Server  LOG      ✓ Compiled in 83ms
+[00:51:37.767] Server  LOG      ✓ Compiled in 117ms
+[00:51:50.420] Server  LOG      ✓ Compiled in 121ms
+[00:55:01.122] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:01.290] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="page.tsx">
+                          <SegmentTrieNode>
+                          <RootPage>
+                            <div
++                             className="relative h-screen w-full"
+-                             className="h-screen w-screen items-center bg-foreground overflow-hidden"
+                            >
+                              <Login onLogin={function adminLogin}>
+                                <div
++                                 className="h-screen w-screen items-center bg-foreground overflow-hidden"
+-                                 className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+                                >
+                                  <div
++                                   className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+-                                   className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg f..."
+                                  >
++                                   <div
++                                     className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg..."
++                                   >
+-                                   <span className="text-white font-bold text-lg">
+                                    ...
+                                  ...
+                        ...
+                      ...
+          ...
+    ...
+
+[00:55:01.290] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:55:01.290] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:55:01.290] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:55:01.290] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930055865}
+[00:55:01.290] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930055865}
+[00:56:06.159] Server  LOG      ✓ Compiled in 103ms
+[00:57:39.467] Server  LOG      ✓ Compiled in 119ms
+[00:57:51.233] Server  LOG      ✓ Compiled in 62ms
+[00:57:58.547] Server  LOG      ✓ Compiled in 80ms
+[00:58:03.269] Server  LOG      ✓ Compiled in 70ms
+[00:58:32.204] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:32.376] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="page.tsx">
+                          <SegmentTrieNode>
+                          <RootPage>
+                            <div
++                             className="relative h-screen w-full bg-linear-to-b rounded-2xl from-foreground via-foreg..."
+-                             className="h-screen w-screen items-center bg-foreground overflow-hidden"
+                            >
+                              <Login onLogin={function adminLogin}>
+                                <div
++                                 className="h-screen w-screen items-center bg-foreground overflow-hidden"
+-                                 className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+                                >
+                                  <div
++                                   className="absolute top-6 left-6 z-20 flex items-center space-x-3"
+-                                   className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg f..."
+                                  >
++                                   <div
++                                     className="w-10 h-10 bg-white/20 backdrop-blur-sm border border-white rounded-lg..."
++                                   >
+-                                   <span className="text-white font-bold text-lg">
+                                    ...
+                                  ...
+                        ...
+                      ...
+          ...
+    ...
+
+[00:58:32.376] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:58:32.376] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:58:32.376] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:58:32.376] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930266945}
+[00:58:32.376] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930266945}
+[00:58:58.150] Server  LOG      ✓ Compiled in 85ms
+[00:59:20.852] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:59:21.044] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:59:21.044] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:59:21.044] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930315609}
+[01:05:12.297] Server  LOG      ✓ Compiled in 118ms
+[01:05:23.741] Server  LOG      ✓ Compiled in 84ms
+[01:06:03.187] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:06:03.386] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:06:03.386] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:06:03.386] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930717955}
+[01:07:53.465] Server  LOG      ✓ Compiled in 78ms
+[01:09:02.840] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:09:03.255] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:09:03.256] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:09:03.256] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930897825}
+[01:10:17.327] Server  LOG      ✓ Compiled in 271ms
+[01:10:17.580] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:17.930] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:10:17.930] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:10:17.930] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930972499}
+[01:10:35.482] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:35.955] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:10:35.955] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:10:35.955] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766930990529}
+[01:11:05.216] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"http://localhost:3000/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931019785}
+[01:11:14.495] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/users color: rgb(120, 120, 120) color: inherit {"dp":"/users","o":"http://localhost:3000/users","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931029060}
+[01:12:34.273] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931108801}
+[01:13:05.264] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:13:05.484] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:13:05.484] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:13:05.484] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931140057}
+[01:18:16.078] Server  LOG      ✓ Compiled in 112ms
+[01:19:06.384] Browser LOG     Something went wrong at our end. message
+[01:19:06.384] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:19:06.640] Browser LOG     Something went wrong at our end. message
+[01:19:06.640] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:19:06.841] Browser LOG     Something went wrong at our end. message
+[01:19:06.841] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:19:07.210] Browser LOG     Something went wrong at our end. message
+[01:19:07.211] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:19:07.350] Browser LOG     Something went wrong at our end. message
+[01:19:07.350] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:20:35.748] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:20:36.862] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:20:36.862] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:20:36.862] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931591420}
+[01:20:37.707] Browser LOG     Something went wrong at our end. message
+[01:20:37.707] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:20:42.816] Browser LOG     Something went wrong at our end. message
+[01:20:42.816] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:20:43.749] Browser LOG     Something went wrong at our end. message
+[01:20:43.749] Browser ERROR   unhandledRejection: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.enqueueSnackbar) is not a function
+[01:22:59.779] Server  LOG      ✓ Compiled in 77ms
+[01:23:08.044] Browser LOG     Something went wrong at our end. message
+[01:23:09.544] Browser LOG     Something went wrong at our end. message
+[01:23:10.820] Browser LOG     Something went wrong at our end. message
+[01:23:12.161] Browser LOG     Something went wrong at our end. message
+[01:23:13.888] Browser LOG     Something went wrong at our end. message
+[01:23:15.377] Browser LOG     Something went wrong at our end. message
+[01:23:16.994] Browser LOG     Something went wrong at our end. message
+[01:23:40.997] Server  LOG      ✓ Compiled in 69ms
+[01:24:35.062] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.063] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.064] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.084] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.132] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.133] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.136] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/server/route-modules/app-page/vendored/rsc/react.js}.default.createContext is not a function
+[01:24:35.138] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.139] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.139] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.139] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.149] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.150] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.152] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:35.260] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.264] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.265] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.269] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.271] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.271] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.272] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/server/route-modules/app-page/vendored/rsc/react.js}.default.createContext is not a function
+[01:24:35.273] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.273] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.274] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.274] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.276] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.277] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:35.278] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:35.280] Server  LOG      ✓ Compiled in 110ms
+[01:24:36.036] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.036] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.037] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.037] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.038] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.038] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.039] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.041] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.041] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.042] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.042] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.043] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.044] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.045] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.053] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.053] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.054] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.054] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.055] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.055] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.056] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.058] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.058] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.058] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.059] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.061] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.062] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.063] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.097] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.097] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.097] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.098] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.099] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.099] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.100] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.102] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.102] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.103] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.103] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.104] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.105] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.107] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.126] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.126] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.126] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.126] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.127] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.128] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.129] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.131] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.131] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.132] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.132] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.135] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.136] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.137] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.158] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.158] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.159] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.159] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.160] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.160] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.162] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.163] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.163] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.163] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.164] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.165] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.165] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.166] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.184] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.184] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.184] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.185] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.186] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.186] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.187] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.188] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.189] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.189] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.189] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.192] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.193] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.194] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.224] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.224] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.225] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.225] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.226] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.226] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.228] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.231] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.231] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.232] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.232] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.233] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.234] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.235] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.260] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.261] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.261] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.262] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.262] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.263] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.264] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.265] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__efb4ce33._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.265] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.265] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__55b2fee6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.266] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_next_dist_179b90d2._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.269] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.270] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:24:36.271] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.513] Browser ERROR   uncaughtError: TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:24:36.571] Browser ERROR   uncaughtError: TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:25:43.901] Server  LOG      ✓ Compiled in 113ms
+[01:25:44.653] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:25:45.599] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:25:45.599] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:25:45.599] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931899900}
+[01:25:49.843] Browser LOG     Something went wrong at our end. message
+[01:25:53.577] Browser LOG     Something went wrong at our end. message
+[01:25:59.410] Server  LOG      ✓ Compiled in 194ms
+[01:25:59.993] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:26:02.110] Browser LOG     Something went wrong at our end. message
+[01:26:06.139] Server  LOG      ✓ Compiled in 158ms
+[01:26:06.627] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:26:07.032] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:26:07.032] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:26:07.032] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766931921606}
+[01:26:08.835] Browser LOG     Something went wrong at our end. message
+[01:28:22.497] Server  LOG      ✓ Compiled in 75ms
+[01:28:26.623] Browser LOG     Something went wrong at our end. message
+[01:28:28.278] Browser LOG     Something went wrong at our end. message
+[01:28:29.945] Browser LOG     Something went wrong at our end. message
+[01:28:31.110] Browser LOG     Something went wrong at our end. message
+[01:28:51.276] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:28:51.608] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:28:51.608] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:28:51.608] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932086177}
+[01:29:43.755] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.756] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.757] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.775] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.778] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.778] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.781] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.782] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.783] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.783] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.784] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.784] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.785] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/server/route-modules/app-page/vendored/rsc/react.js}.default.createContext is not a function
+[01:29:43.786] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.787] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.787] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.787] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.789] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.789] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.790] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.790] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.791] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.791] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.791] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.792] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.792] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:43.838] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.838] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.839] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.839] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.841] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.841] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.842] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.843] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.843] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.844] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.844] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.845] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.845] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:43.847] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.848] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.848] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.849] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.850] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.851] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.852] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.852] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.853] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.853] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.853] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.854] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.855] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:43.921] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.922] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.922] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.923] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.924] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.924] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.925] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.925] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.926] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.926] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.926] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.927] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.927] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:43.928] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.929] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.929] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.930] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.931] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.931] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.932] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.932] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.932] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.933] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.933] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.934] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.934] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:43.986] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.987] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.987] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.988] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.989] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.990] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.991] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.991] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.992] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.992] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.993] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.993] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.994] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:43.995] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\_3eaadd9f._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.996] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.996] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\[root-of-the-server]__ec4ae640._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.997] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\.next\dev\server\chunks\ssr\node_modules_94e4c9af._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.998] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:43.999] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.000] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.000] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.001] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.001] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.001] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.002] Server  ERROR   D:\Projekts\Projekts\NEXUS_ADMIN_ORG_GIT\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:29:44.002] Server  ERROR    ⨯ TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:29:44.210] Browser ERROR   uncaughtError: TypeError: createContext only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/context-in-server-component
+[01:30:06.364] Server  LOG      ✓ Compiled in 93ms
+[01:30:11.167] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:11.423] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:30:11.423] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:30:11.423] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932165998}
+[01:30:31.041] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/users color: rgb(120, 120, 120) color: inherit {"dp":"/users","o":"http://localhost:3000/users","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932185572}
+[01:30:39.356] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/courses color: rgb(120, 120, 120) color: inherit {"dp":"/courses","o":"http://localhost:3000/courses","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932193928}
+[01:30:42.845] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/users color: rgb(120, 120, 120) color: inherit {"dp":"/users","o":"http://localhost:3000/users","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932197392}
+[01:30:45.130] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932199663}
+[01:30:59.491] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/users color: rgb(120, 120, 120) color: inherit {"dp":"/users","o":"http://localhost:3000/users","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932214031}
+[01:32:50.821] Server  LOG      ✓ Compiled in 87ms
+[01:39:12.676] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/profile color: rgb(120, 120, 120) color: inherit {"dp":"/profile","o":"http://localhost:3000/profile","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932707244}
+[01:39:22.194] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/certificates color: rgb(120, 120, 120) color: inherit {"dp":"/certificates","o":"http://localhost:3000/certificates","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932716762}
+[01:39:25.395] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/reports color: rgb(120, 120, 120) color: inherit {"dp":"/reports","o":"http://localhost:3000/reports","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932719958}
+[01:39:26.992] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"http://localhost:3000/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932721557}
+[01:39:28.580] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/reports color: rgb(120, 120, 120) color: inherit {"dp":"/reports","o":"http://localhost:3000/reports","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932723128}
+[01:39:33.477] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"http://localhost:3000/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932728039}
+[01:39:37.279] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/courses color: rgb(120, 120, 120) color: inherit {"dp":"/courses","o":"http://localhost:3000/courses","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932731832}
+[01:39:48.564] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/users color: rgb(120, 120, 120) color: inherit {"dp":"/users","o":"http://localhost:3000/users","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766932743107}
+[05:01:46.573] Server  LOG      ✓ Compiled in 171ms
+[05:05:11.510] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766945065995}
+[05:05:14.731] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/courses color: rgb(120, 120, 120) color: inherit {"dp":"/courses","o":"http://localhost:3000/courses","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766945069261}
+[05:05:18.638] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/assessments color: rgb(120, 120, 120) color: inherit {"dp":"/assessments","o":"http://localhost:3000/assessments","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766945073189}
+[05:05:20.867] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/reports color: rgb(120, 120, 120) color: inherit {"dp":"/reports","o":"http://localhost:3000/reports","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766945075369}
+[05:05:22.827] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/profile color: rgb(120, 120, 120) color: inherit {"dp":"/profile","o":"http://localhost:3000/profile","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766945077379}
+[05:05:29.306] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766945083810}
+[07:07:42.604] Browser WARN    Image with src "http://localhost:3000/images/login-illu.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[07:07:52.397] Server  LOG      ✓ Compiled in 145ms
+[07:08:09.891] Server  LOG      ✓ Compiled in 76ms
+[07:08:23.473] Server  LOG      ✓ Compiled in 72ms
+[07:08:25.682] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:08:25.870] Browser WARN    Image with src "/images/login-illu.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[07:08:25.870] Browser WARN    Image with src "http://localhost:3000/images/login-illu.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[07:08:26.253] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:08:26.253] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:08:26.253] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766952460793}
+[07:08:51.997] Server  LOG      ✓ Compiled in 63ms
+[07:09:01.336] Server  LOG      ✓ Compiled in 91ms
+[07:09:08.343] Server  LOG      ✓ Compiled in 117ms
+[07:09:10.112] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:09:10.278] Browser WARN    Image with src "/images/login-illu.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[07:09:10.452] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:09:10.452] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:09:10.452] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766952504999}
+[07:09:17.319] Server  LOG      ✓ Compiled in 132ms
+[07:09:19.002] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:09:19.166] Browser WARN    Image with src "/images/login-illu.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[07:09:19.300] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:09:19.300] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:09:19.300] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766952513854}
+[07:09:35.895] Server  LOG      ✓ Compiled in 70ms
+[07:10:02.632] Server  LOG      ✓ Compiled in 72ms
+[07:10:16.554] Server  LOG      ✓ Compiled in 129ms
+[07:10:26.677] Server  LOG      ✓ Compiled in 116ms
+[07:10:42.432] Server  LOG      ✓ Compiled in 59ms
+[07:11:08.970] Server  LOG      ✓ Compiled in 67ms
+[07:11:23.388] Server  LOG      ✓ Compiled in 132ms
+[07:11:36.877] Server  LOG      ✓ Compiled in 65ms
+[07:11:42.622] Server  LOG      ✓ Compiled in 77ms
+[07:11:47.514] Server  LOG      ✓ Compiled in 68ms
+[07:11:59.915] Server  LOG      ✓ Compiled in 125ms
+[07:12:03.894] Server  LOG      ✓ Compiled in 90ms
+[07:12:09.622] Server  LOG      ✓ Compiled in 149ms
+[07:12:13.887] Server  LOG      ✓ Compiled in 70ms
+[07:12:51.771] Server  LOG      ✓ Compiled in 66ms
+[07:15:41.931] Server  LOG      ✓ Compiled in 204ms
+[07:16:05.823] Server  LOG      ✓ Compiled in 102ms
+[07:16:21.635] Server  LOG      ✓ Compiled in 115ms
+[07:16:46.200] Server  LOG      ✓ Compiled in 73ms
+[07:17:03.555] Server  LOG      ✓ Compiled in 142ms
+[07:17:25.040] Server  LOG      ✓ Compiled in 121ms
+[07:17:30.745] Server  LOG      ✓ Compiled in 143ms
+[07:18:39.449] Server  LOG      ✓ Compiled in 159ms
+[07:18:47.548] Server  LOG      ✓ Compiled in 95ms
+[07:19:32.169] Server  LOG      ✓ Compiled in 92ms
+[07:20:04.897] Server  LOG      ✓ Compiled in 79ms
+[07:23:30.459] Server  LOG      ✓ Compiled in 77ms
+[07:24:11.303] Server  LOG      ✓ Compiled in 185ms
+[07:25:17.979] Server  LOG      ✓ Compiled in 75ms
+[07:25:22.252] Server  LOG      ✓ Compiled in 107ms
+[07:25:40.305] Server  LOG      ✓ Compiled in 108ms
+[07:26:06.790] Server  LOG      ✓ Compiled in 88ms
+[07:26:11.747] Server  LOG      ✓ Compiled in 97ms
+[07:26:33.992] Server  LOG      ✓ Compiled in 77ms
+[07:26:44.969] Server  LOG      ✓ Compiled in 80ms
+[07:26:49.384] Server  LOG      ✓ Compiled in 95ms
+[07:26:53.792] Server  LOG      ✓ Compiled in 140ms
+[07:27:03.686] Server  LOG      ✓ Compiled in 74ms
+[07:27:10.839] Server  LOG      ✓ Compiled in 67ms
+[07:27:28.076] Server  LOG      ✓ Compiled in 166ms
+[07:27:41.367] Server  LOG      ✓ Compiled in 65ms
+[07:28:33.442] Server  LOG      ✓ Compiled in 132ms
+[07:28:40.813] Server  LOG      ✓ Compiled in 64ms
+[07:28:53.773] Server  LOG      ✓ Compiled in 67ms
+[07:28:55.952] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:28:57.482] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:28:57.651] Browser WARN    Image with src "/images/login-illu.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[07:28:58.220] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:28:58.772] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:28:59.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:29:00.218] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:29:00.218] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:29:00.218] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953694770}
+[07:29:11.126] Server  LOG      ✓ Compiled in 137ms
+[07:29:15.157] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:29:15.609] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:29:15.609] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:29:15.609] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953710060}
+[07:29:23.039] Server  LOG      ✓ Compiled in 77ms
+[07:29:25.705] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:29:26.097] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:29:26.474] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:29:26.474] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:29:26.475] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953721019}
+[07:29:29.622] Server  LOG      ✓ Compiled in 66ms
+[07:29:35.353] Server  LOG      ✓ Compiled in 142ms
+[07:29:43.063] Server  LOG      ✓ Compiled in 174ms
+[07:29:55.554] Server  LOG      ✓ Compiled in 103ms
+[07:30:00.818] Server  LOG      ✓ Compiled in 95ms
+[07:30:03.233] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:30:03.560] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:30:03.560] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:30:03.560] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953758150}
+[07:30:03.854] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:30:04.518] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:30:04.823] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:30:04.823] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:30:04.823] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953759377}
+[07:30:05.206] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:30:05.763] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:30:06.099] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:30:06.099] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:30:06.099] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953760646}
+[07:30:09.221] Server  LOG      ✓ Compiled in 101ms
+[07:30:18.078] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:30:18.425] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:30:18.425] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:30:18.425] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766953772972}
+[07:31:14.123] Server  LOG      ✓ Compiled in 194ms
+[07:31:19.226] Server  LOG      ✓ Compiled in 78ms
+[07:31:24.842] Server  LOG      ✓ Compiled in 86ms
+[07:31:33.327] Server  LOG      ✓ Compiled in 61ms
+[07:31:52.230] Server  LOG      ✓ Compiled in 104ms
+[07:32:09.057] Server  LOG      ✓ Compiled in 173ms
+[07:32:15.471] Server  LOG      ✓ Compiled in 205ms
+[07:32:21.886] Server  LOG      ✓ Compiled in 166ms
+[07:32:25.393] Server  LOG      ✓ Compiled in 181ms
+[07:32:28.880] Server  LOG      ✓ Compiled in 215ms
+[07:32:39.680] Server  LOG      ✓ Compiled in 201ms
+[07:33:16.664] Server  LOG      ✓ Compiled in 65ms
+[07:33:49.059] Server  LOG      ✓ Compiled in 126ms
+[07:34:00.117] Server  LOG      ✓ Compiled in 83ms
+[07:34:06.698] Server  LOG      ✓ Compiled in 97ms
+[07:34:21.778] Server  LOG      ✓ Compiled in 175ms
+[07:34:35.199] Server  LOG      ✓ Compiled in 209ms
+[07:34:38.867] Server  LOG      ✓ Compiled in 87ms
+[07:34:51.334] Server  LOG      ✓ Compiled in 77ms
+[07:35:18.034] Server  LOG      ✓ Compiled in 82ms
+[07:35:29.265] Server  LOG      ✓ Compiled in 91ms
+[07:35:39.105] Server  LOG      ✓ Compiled in 116ms
+[07:35:50.679] Server  LOG      ✓ Compiled in 68ms
+[07:35:58.540] Server  LOG      ✓ Compiled in 70ms
+[07:36:02.407] Server  LOG      ✓ Compiled in 88ms
+[07:36:04.027] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:36:04.509] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:36:04.509] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:36:04.509] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766954119048}
+[07:36:16.068] Server  LOG      ✓ Compiled in 61ms
+[07:36:58.511] Server  LOG      ✓ Compiled in 144ms
+[07:37:35.106] Server  LOG      ✓ Compiled in 65ms
+[07:37:43.882] Server  LOG      ✓ Compiled in 195ms
+[07:37:56.796] Server  LOG      ✓ Compiled in 208ms
+[07:38:06.364] Server  LOG      ✓ Compiled in 177ms
+[07:38:12.983] Server  LOG      ✓ Compiled in 91ms
+[07:38:22.700] Server  LOG      ✓ Compiled in 71ms
+[07:38:28.736] Server  LOG      ✓ Compiled in 63ms
+[07:38:42.290] Server  LOG      ✓ Compiled in 97ms
+[07:38:52.268] Server  LOG      ✓ Compiled in 64ms
+[07:39:00.795] Server  LOG      ✓ Compiled in 217ms
+[07:39:07.551] Server  LOG      ✓ Compiled in 87ms
+[07:39:18.495] Server  LOG      ✓ Compiled in 210ms
+[07:39:23.562] Server  LOG      ✓ Compiled in 174ms
+[07:39:30.315] Server  LOG      ✓ Compiled in 232ms
+[07:39:34.409] Server  LOG      ✓ Compiled in 127ms
+[07:39:44.620] Server  LOG      ✓ Compiled in 166ms
+[07:39:49.019] Server  LOG      ✓ Compiled in 113ms
+[07:39:53.008] Server  LOG      ✓ Compiled in 175ms
+[07:39:56.231] Server  LOG      ✓ Compiled in 65ms
+[07:40:05.798] Server  LOG      ✓ Compiled in 134ms
+[07:40:08.977] Server  LOG      ✓ Compiled in 130ms
+[07:40:18.406] Server  LOG      ✓ Compiled in 68ms
+[07:40:23.472] Server  LOG      ✓ Compiled in 73ms
+[07:40:44.792] Server  LOG      ✓ Compiled in 181ms
+[07:40:50.731] Server  LOG      ✓ Compiled in 89ms
+[07:40:57.958] Server  LOG      ✓ Compiled in 121ms
+[07:41:05.637] Server  LOG      ✓ Compiled in 65ms
+[07:41:27.809] Server  LOG      ✓ Compiled in 266ms
+[07:41:32.225] Server  LOG      ✓ Compiled in 156ms
+[07:41:38.005] Server  LOG      ✓ Compiled in 118ms
+[07:41:42.920] Server  LOG      ✓ Compiled in 174ms
+[07:41:46.745] Server  LOG      ✓ Compiled in 174ms
+[07:42:00.226] Server  LOG      ✓ Compiled in 122ms
+[07:42:12.908] Server  LOG      ✓ Compiled in 86ms
+[07:42:19.140] Server  LOG      ✓ Compiled in 66ms
+[07:42:25.249] Server  LOG      ✓ Compiled in 86ms
+[07:42:36.564] Server  LOG      ✓ Compiled in 63ms
+[07:46:01.347] Server  LOG      ✓ Compiled in 186ms
+[07:46:11.157] Server  LOG      ✓ Compiled in 245ms
+[07:46:15.854] Server  LOG      ✓ Compiled in 220ms
+[07:46:19.733] Server  LOG      ✓ Compiled in 302ms
+[07:46:24.400] Server  LOG      ✓ Compiled in 133ms
+[07:46:37.315] Server  LOG      ✓ Compiled in 237ms
+[07:52:23.201] Server  LOG      ✓ Compiled in 112ms
+[07:52:32.968] Server  LOG      ✓ Compiled in 83ms
+[07:52:33.603] Browser ERROR   Failed to load animation data from URL: /lotties/nexus-logo-animation.dotlottie. Error: Failed to fetch animation data from URL: /lotties/nexus-logo-animation.dotlottie. 404: Not Found
+[07:52:33.603] Browser ERROR   Failed to load animation data from URL: /lotties/nexus-logo-animation.dotlottie. Error: Failed to fetch animation data from URL: /lotties/nexus-logo-animation.dotlottie. 404: Not Found
+[07:52:43.009] Server  LOG      ✓ Compiled in 71ms
+[07:52:47.961] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:52:48.219] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                    <SegmentViewNode type="page" pagePath="page.tsx">
+                      <SegmentTrieNode>
+                      <RootPage>
+                        <div className={"h-screen..."}>
+                          <Login onLogin={function adminLogin}>
+                            <div className={"h-screen..."}>
+                              <div>
+                              <div className="flex flex-...">
+                                <div className="bg-main-bg...">
+-                                 <div
+-                                   style={{position:"absolute",top:"8px",left:"8px",z-index:"1000",cursor:"pointer",opacity:"1", ...}}
+-                                 >
+                                ...
+                    ...
+                  ...
+      ...
+
+[07:52:48.796] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:52:48.796] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:52:48.796] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[07:52:48.796] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766955123339}
+[07:52:48.796] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766955123340}
+[07:53:35.315] Server  LOG      ✓ Compiled in 75ms
+[07:54:10.830] Server  LOG      ✓ Compiled in 90ms
+[07:54:32.318] Server  LOG      ✓ Compiled in 169ms
+[07:55:49.114] Server  LOG      ✓ Compiled in 106ms
+[07:55:58.464] Server  LOG      ✓ Compiled in 134ms
+[07:56:11.320] Server  LOG      ✓ Compiled in 105ms
+[07:57:54.430] Server  LOG      ✓ Compiled in 261ms
+[07:57:59.790] Server  LOG      ✓ Compiled in 87ms
+[07:58:10.814] Server  LOG      ✓ Compiled in 109ms
+[08:01:10.295] Server  LOG      ✓ Compiled in 90ms
+[08:18:20.320] Server  LOG      ✓ Compiled in 319ms
+[08:18:30.529] Server  LOG      ✓ Compiled in 241ms
+[08:19:25.443] Server  LOG      ✓ Compiled in 161ms
+[08:19:27.366] Browser LOG     Something went wrong at our end. message
+[08:19:30.828] Browser LOG     Something went wrong at our end. message
+[08:19:32.411] Browser LOG     Something went wrong at our end. message
+[08:19:33.770] Browser LOG     Something went wrong at our end. message
+[08:19:35.145] Browser LOG     Something went wrong at our end. message
+[08:21:23.699] Server  LOG      ✓ Compiled in 69ms
+[08:21:42.326] Server  LOG      ✓ Compiled in 73ms
+[08:21:45.324] Browser LOG     Something went wrong at our end. message
+[08:21:46.928] Browser LOG     Something went wrong at our end. message
+[08:21:48.529] Browser LOG     Something went wrong at our end. message
+[08:22:18.845] Server  LOG      ✓ Compiled in 74ms
+[08:22:21.625] Browser LOG     Something went wrong at our end. message
+[08:22:23.086] Browser LOG     Something went wrong at our end. message
+[08:22:24.687] Browser LOG     Something went wrong at our end. message
+[08:22:25.996] Browser LOG     Something went wrong at our end. message
+[08:24:00.905] Server  LOG      ✓ Compiled in 155ms
+[08:25:20.041] Server  LOG      ✓ Compiled in 130ms
+[08:25:40.643] Server  LOG      ✓ Compiled in 181ms
+[08:25:43.936] Server  LOG      ✓ Compiled in 133ms
+[08:25:57.815] Server  LOG      ✓ Compiled in 234ms
+[08:26:11.478] Server  LOG      ✓ Compiled in 105ms
+[08:26:32.121] Server  LOG      ✓ Compiled in 184ms
+[08:26:38.763] Server  LOG      ✓ Compiled in 189ms
+[08:26:49.609] Server  LOG      ✓ Compiled in 129ms
+[08:27:52.713] Server  LOG      ✓ Compiled in 143ms
+[08:28:08.337] Server  LOG      ✓ Compiled in 68ms
+[08:28:25.447] Browser LOG     Something went wrong at our end. message
+[08:28:27.272] Browser LOG     Something went wrong at our end. message
+[08:28:28.763] Browser LOG     Something went wrong at our end. message
+[08:28:30.156] Browser LOG     Something went wrong at our end. message
+[08:28:35.927] Browser LOG     Something went wrong at our end. message
+[08:31:10.866] Browser LOG     Something went wrong at our end. message

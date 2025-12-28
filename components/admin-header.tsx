@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Bell, Search, Moon, Sun, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { useTheme } from "@/components/theme-provider"
+import { Bell, Search, Moon, Sun, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useTheme } from "@/components/theme-provider";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,44 +11,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link" // Added Link import
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link"; // Added Link import
 
 export function AdminHeader() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-border bg-background px-6">
       <div className="flex flex-1 items-center gap-4">
         {/* Organization Switcher */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="gap-2 bg-transparent">
-              <span className="font-medium">Acme Corporation</span>
-              <ChevronDown className="h-4 w-4 text-muted-foreground" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-56">
-            <DropdownMenuLabel>Organizations</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <div className="flex flex-col">
-                <span className="font-medium">Acme Corporation</span>
-                <span className="text-xs text-muted-foreground">Enterprise Plan</span>
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <div className="flex flex-col">
-                <span className="font-medium">TechStart Inc</span>
-                <span className="text-xs text-muted-foreground">Pro Plan</span>
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>+ Add Organization</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
 
         {/* Search */}
         <div className="relative max-w-md flex-1">
@@ -59,8 +33,17 @@ export function AdminHeader() {
 
       <div className="flex items-center gap-2">
         {/* Theme Toggle */}
-        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
-          {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === "light" ? (
+            <Moon className="h-5 w-5" />
+          ) : (
+            <Sun className="h-5 w-5" />
+          )}
         </Button>
 
         {/* Notifications */}
@@ -86,25 +69,33 @@ export function AdminHeader() {
                   <span className="font-medium">Subscription expiring</span>
                   <span className="text-xs text-muted-foreground">2h ago</span>
                 </div>
-                <span className="text-sm text-muted-foreground">Acme Corp subscription expires in 7 days</span>
+                <span className="text-sm text-muted-foreground">
+                  Acme Corp subscription expires in 7 days
+                </span>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex flex-col items-start gap-1 p-3">
                 <div className="flex w-full items-start justify-between">
                   <span className="font-medium">New user registered</span>
                   <span className="text-xs text-muted-foreground">5h ago</span>
                 </div>
-                <span className="text-sm text-muted-foreground">John Doe joined React Fundamentals course</span>
+                <span className="text-sm text-muted-foreground">
+                  John Doe joined React Fundamentals course
+                </span>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex flex-col items-start gap-1 p-3">
                 <div className="flex w-full items-start justify-between">
                   <span className="font-medium">Course completed</span>
                   <span className="text-xs text-muted-foreground">1d ago</span>
                 </div>
-                <span className="text-sm text-muted-foreground">Sarah Wilson completed Advanced TypeScript</span>
+                <span className="text-sm text-muted-foreground">
+                  Sarah Wilson completed Advanced TypeScript
+                </span>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="justify-center text-center">View all notifications</DropdownMenuItem>
+            <DropdownMenuItem className="justify-center text-center">
+              View all notifications
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
@@ -118,7 +109,9 @@ export function AdminHeader() {
               </Avatar>
               <div className="flex flex-col items-start text-left">
                 <span className="text-sm font-medium">Admin User</span>
-                <span className="text-xs text-muted-foreground">Super Admin</span>
+                <span className="text-xs text-muted-foreground">
+                  Super Admin
+                </span>
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </Button>
@@ -134,10 +127,12 @@ export function AdminHeader() {
             <DropdownMenuItem>Team</DropdownMenuItem>
             <DropdownMenuItem>Preferences</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">Log out</DropdownMenuItem>
+            <DropdownMenuItem className="text-destructive">
+              Log out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
     </header>
-  )
+  );
 }

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projekts/Projekts/NEXUS_ADMIN_ORG_GIT/components/snackbarprovider.tsx"],"sourcesContent":["\"use client\";\r\nimport { SnackbarProvider } from \"notistack\";\r\nimport React from \"react\";\r\n\r\nexport default function NotistackProvider({\r\n  children,\r\n}: {\r\n  children: React.ReactNode;\r\n}) {\r\n  return (\r\n    <SnackbarProvider\r\n      maxSnack={3}\r\n      anchorOrigin={{ vertical: \"top\", horizontal: \"right\" }}\r\n      autoHideDuration={3000}\r\n    >\r\n      {children}\r\n    </SnackbarProvider>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AACA;AADA;;;AAIe,SAAS,kBAAkB,EACxC,QAAQ,EAGT;IACC,qBACE,6LAAC,oKAAgB;QACf,UAAU;QACV,cAAc;YAAE,UAAU;YAAO,YAAY;QAAQ;QACrD,kBAAkB;kBAEjB;;;;;;AAGP;KAdwB"}}]
+}

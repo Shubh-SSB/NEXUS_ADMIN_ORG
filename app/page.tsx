@@ -4,10 +4,8 @@ import { adminLogin } from "@/functions/login";
 export default function RootPage() {
   return (
     <>
-      <div className="min-h-screen w-full">
-        <div className="relative h-screen w-full">
-          <Login onLogin={adminLogin} />
-        </div>
+      <div className="h-screen w-full ">
+        <Login onLogin={adminLogin} />
       </div>
     </>
   );

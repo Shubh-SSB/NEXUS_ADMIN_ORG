@@ -9,6 +9,8 @@ import {
   Geist_Mono,
   Playfair_Display as V0_Font_Playfair_Display,
 } from "next/font/google";
+import { SnackbarProvider } from "notistack";
+import NotistackProvider from "@/components/snackbarprovider";
 
 // Initialize fonts
 const _geist = Geist({
@@ -54,8 +56,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${_geistMono.className} antialiased`}>
-        {children}
-        <Analytics />
+        <NotistackProvider>
+          {children}
+          <Analytics />
+        </NotistackProvider>
       </body>
     </html>
   );
