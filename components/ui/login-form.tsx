@@ -14,14 +14,13 @@ const LoginForm: React.FC<LoginProps> = ({
   error,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [loading, setLoading] = React.useState(false);
+  // Use isLoading prop for loading state
   const [showPassword, setShowPassword] = React.useState(false);
   const [shake, setShake] = React.useState(false);
 
   const { formData, handleInputChange, handleSubmit, handleForgotPassword } =
     useLogin(onLogin, onForgotPassword);
 
-  // Remove local handleSubmit, use the one from useLogin
 
   return (
     <div
@@ -60,7 +59,7 @@ const LoginForm: React.FC<LoginProps> = ({
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Eg.: user@company.edu.in"
-                disabled={loading}
+                disabled={isLoading}
                 required
                 className="w-full pl-10 pr-4 py-3 rounded-lg
                   border-2 border-main-bg/20 bg-white/10
@@ -99,7 +98,7 @@ const LoginForm: React.FC<LoginProps> = ({
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Enter your secure password"
-                disabled={loading}
+                disabled={isLoading}
                 required
                 className="w-full pl-10 pr-14 py-3 rounded-lg
                   border-2 border-main-bg/20 bg-white/10
@@ -133,7 +132,7 @@ const LoginForm: React.FC<LoginProps> = ({
                 type="checkbox"
                 checked={formData.rememberMe}
                 onChange={handleInputChange}
-                disabled={loading}
+                disabled={isLoading}
                 className="w-4 h-4 rounded bg-white/10
                   checked:scale-110 transition-transform accent-color-main-bg"
               />
@@ -145,7 +144,7 @@ const LoginForm: React.FC<LoginProps> = ({
             <button
               type="button"
               onClick={handleForgotPassword}
-              disabled={loading}
+              disabled={isLoading}
               className="text-main-bg hover:text-red-700 text-sm
                 hover:underline transition-all"
             >
@@ -156,14 +155,14 @@ const LoginForm: React.FC<LoginProps> = ({
           {/* SUBMIT */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={isLoading}
             className="w-full py-3 px-4 my-4 bg-black
               hover:bg-black/90 active:scale-[0.98]
               transition-transform disabled:bg-gray-700
               text-white font-medium rounded-lg
               flex items-center justify-center"
           >
-            {loading ? (
+            {isLoading ? (
               <>
                 <svg
                   className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
