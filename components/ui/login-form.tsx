@@ -18,26 +18,10 @@ const LoginForm: React.FC<LoginProps> = ({
   const [showPassword, setShowPassword] = React.useState(false);
   const [shake, setShake] = React.useState(false);
 
-  const { formData, handleInputChange, handleForgotPassword } = useLogin(
-    undefined,
-    onForgotPassword
-  );
+  const { formData, handleInputChange, handleSubmit, handleForgotPassword } =
+    useLogin(onLogin, onForgotPassword);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      if (onLogin) {
-        await onLogin(formData);
-      }
-    } catch (err: any) {
-      setShake(true);
-      setTimeout(() => setShake(false), 400);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Remove local handleSubmit, use the one from useLogin
 
   return (
     <div
@@ -202,10 +186,10 @@ const LoginForm: React.FC<LoginProps> = ({
                        C5.373 0 0 5.373 0 12h4z"
                   />
                 </svg>
-                Signing In...
+                Logging In...
               </>
             ) : (
-              "Sign In"
+              "Log In"
             )}
           </button>
         </form>
