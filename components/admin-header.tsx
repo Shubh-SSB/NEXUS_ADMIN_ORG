@@ -14,16 +14,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link"; // Added Link import
+import Link from "next/link";
+import { LogoutButton, useAuth } from "@/components/auth";
+import { S3_URL } from "@/lib/api-data-store";
 
 export function AdminHeader() {
   const { theme, toggleTheme } = useTheme();
+  const { userData } = useAuth();
+
+  // Extract user info with fallbacks
+  const userName = userData?.name || "Admin User";
+  const userType = userData?.type || "admin";
+  const userInitials = userName.substring(0, 2).toUpperCase();
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-border bg-background px-6">
       <div className="flex flex-1 items-center gap-4">
-        {/* Organization Switcher */}
-
         {/* Search */}
         <div className="relative max-w-md flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -104,13 +110,13 @@ export function AdminHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="gap-2 pl-2">
               <Avatar className="h-8 w-8">
-                <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                <AvatarFallback>AD</AvatarFallback>
+                <AvatarImage src={S3_URL + userData?.logo} />
+                <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <div className="flex flex-col items-start text-left">
-                <span className="text-sm font-medium">Admin User</span>
-                <span className="text-xs text-muted-foreground">
-                  Super Admin
+                <span className="text-sm font-medium">{userName}</span>
+                <span className="text-xs text-muted-foreground capitalize">
+                  {userType}
                 </span>
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
@@ -124,12 +130,27 @@ export function AdminHeader() {
                 Profile
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Preferences</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
-              Log out
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard" className="flex w-full items-center">
+                Dashboard
+              </Link>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/users" className="flex w-full items-center">
+                Users
+              </Link>
+            </DropdownMenuItem>
+
+            {/* <DropdownMenuItem>Team</DropdownMenuItem> */}
+            {/* <DropdownMenuItem>Preferences</DropdownMenuItem> */}
+            <DropdownMenuSeparator />
+            <LogoutButton
+              variant="ghost"
+              className="w-full justify-start text-destructive hover:text-destructive px-2 py-1.5 text-sm"
+              showConfirmation={true}
+            >
+              Log out
+            </LogoutButton>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

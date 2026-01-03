@@ -8,11 +8,17 @@ import {
   Geist,
   Geist_Mono,
   Playfair_Display as V0_Font_Playfair_Display,
+  Poppins,
 } from "next/font/google";
 import { SnackbarProvider } from "notistack";
 import NotistackProvider from "@/components/snackbarprovider";
+import { AuthProvider } from "@/components/auth";
 
 // Initialize fonts
+const _poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 const _geist = Geist({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -55,10 +61,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${_geistMono.className} antialiased`}>
+      <body className={`${_poppins.className} antialiased`}>
         <NotistackProvider>
-          {children}
-          <Analytics />
+          <AuthProvider>
+            {children}
+            <Analytics />
+          </AuthProvider>
         </NotistackProvider>
       </body>
     </html>

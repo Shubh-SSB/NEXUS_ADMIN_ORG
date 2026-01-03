@@ -2,6 +2,7 @@ export interface LoginFormData {
   email: string;
   password: string;
   rememberMe: boolean;
+  token?: string;
 }
 
 export interface LoginProps {
@@ -10,6 +11,7 @@ export interface LoginProps {
   onSignUp?: () => void;
   isLoading?: boolean;
   error?: string;
+  token?: string;
 }
 
 export interface UseLoginReturn {
@@ -17,4 +19,5 @@ export interface UseLoginReturn {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => Promise<void>;
   handleForgotPassword: () => Promise<void>;
+  token?: string;
 }

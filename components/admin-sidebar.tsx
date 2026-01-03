@@ -47,24 +47,24 @@ const navigation = [
     icon: BookOpen,
     roles: ["admin", "manager", "trainer"],
   },
-  {
-    name: "Assessments",
-    href: "/assessments",
-    icon: FileCheck,
-    roles: ["admin", "manager", "trainer"],
-  },
-  {
-    name: "Reports",
-    href: "/reports",
-    icon: BarChart3,
-    roles: ["admin", "manager"],
-  },
-  {
-    name: "Certificates",
-    href: "/certificates",
-    icon: Award,
-    roles: ["admin", "manager"],
-  },
+  // {
+  //   name: "Assessments",
+  //   href: "/assessments",
+  //   icon: FileCheck,
+  //   roles: ["admin", "manager", "trainer"],
+  // },
+  // {
+  //   name: "Reports",
+  //   href: "/reports",
+  //   icon: BarChart3,
+  //   roles: ["admin", "manager"],
+  // },
+  // {
+  //   name: "Certificates",
+  //   href: "/certificates",
+  //   icon: Award,
+  //   roles: ["admin", "manager"],
+  // },
   {
     name: "Profile",
     href: "/profile",
@@ -94,7 +94,7 @@ export function AdminSidebar() {
         <div className="flex h-16 items-center border-b border-sidebar-border px-4">
           {!collapsed ? (
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sidebar-primary">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-main-bg">
                 <BookOpen className="h-5 w-5 text-sidebar-primary-foreground" />
               </div>
               <span className="text-lg font-semibold text-sidebar-foreground">
@@ -102,7 +102,7 @@ export function AdminSidebar() {
               </span>
             </div>
           ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sidebar-primary">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-main-bg">
               <BookOpen className="h-5 w-5 text-sidebar-primary-foreground" />
             </div>
           )}

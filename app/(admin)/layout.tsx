@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { GlobalLoader } from "@/components/global-loader";
 import { SnackbarProvider } from "notistack";
 import NotistackProvider from "@/components/snackbarprovider";
+import { AuthGuard } from "@/components/auth";
 
 export default function AdminLayout({
   children,
@@ -12,17 +13,25 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider>
-      <NotistackProvider>
-        <div className="flex h-screen overflow-hidden bg-background">
-          <AdminSidebar />
-          <div className="flex flex-1 flex-col overflow-hidden">
-            <AdminHeader />
-            <main className="flex-1 overflow-y-auto p-6">{children}</main>
-          </div>
-          <GlobalLoader />
+    <AuthGuard
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-pulse">Checking authentication...</div>
         </div>
-      </NotistackProvider>
-    </ThemeProvider>
+      }
+    >
+      <ThemeProvider>
+        <NotistackProvider>
+          <div className="flex h-screen overflow-hidden bg-background">
+            <AdminSidebar />
+            <div className="flex flex-1 flex-col overflow-hidden">
+              <AdminHeader />
+              <main className="flex-1 overflow-y-auto p-6">{children}</main>
+            </div>
+            <GlobalLoader />
+          </div>
+        </NotistackProvider>
+      </ThemeProvider>
+    </AuthGuard>
   );
 }
