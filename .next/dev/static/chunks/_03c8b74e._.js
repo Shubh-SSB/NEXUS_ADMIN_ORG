@@ -414,6 +414,16 @@ class StudentsService {
             throw error;
         }
     }
+    static async fetchAvailableCourses() {
+        try {
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$factory$2f$crudFactory$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["$crud"].get("retrieve/organization/assigned/courses");
+            // @ts-ignore
+            return response.data?.assignedCourses || [];
+        } catch (error) {
+            console.error("Error fetching courses:", error);
+            return [];
+        }
+    }
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -2757,7 +2767,7 @@ const UserListTable = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$pr
     const [updateModalOpen, setUpdateModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [selectedStudent, setSelectedStudent] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const { students, isLoading, error, refetch, currentPage, totalPages, totalRecords, hasNextPage, hasPrevPage, pagination, goToPage, changeLimit } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useStudents$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useStudents"])({
-        page: 1,
+        page: 0,
         limit: 10
     });
     // Expose refetch method through ref
@@ -3473,6 +3483,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/dialog.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/input.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/label.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/select.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dayjs$2d$datetime$2d$picker$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/dayjs-datetime-picker.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$studentsService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/services/studentsService.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2d$circle$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/loader-circle.js [app-client] (ecmascript) <export default as Loader2>");
@@ -3487,17 +3498,30 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
 function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
     _s();
     const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [courses, setCourses] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         name: "",
         email: "",
         phone: "",
         dob: "",
-        password: ""
+        password: "",
+        enrollCourses: []
     });
     const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
+    // Fetch courses when modal opens
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CreateStudentModal.useEffect": ()=>{
+            if (isOpen) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$studentsService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["StudentsService"].fetchAvailableCourses().then(setCourses);
+            }
+        }
+    }["CreateStudentModal.useEffect"], [
+        isOpen
+    ]);
     const handleInputChange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "CreateStudentModal.useCallback[handleInputChange]": (field, value)=>{
             setFormData({
@@ -3506,15 +3530,12 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                         [field]: value
                     })
             }["CreateStudentModal.useCallback[handleInputChange]"]);
-            // Clear error when user starts typing
-            if (errors[field]) {
-                setErrors({
-                    "CreateStudentModal.useCallback[handleInputChange]": (prev)=>({
-                            ...prev,
-                            [field]: ""
-                        })
-                }["CreateStudentModal.useCallback[handleInputChange]"]);
-            }
+            if (errors[field]) setErrors({
+                "CreateStudentModal.useCallback[handleInputChange]": (prev)=>({
+                        ...prev,
+                        [field]: ""
+                    })
+            }["CreateStudentModal.useCallback[handleInputChange]"]);
         }
     }["CreateStudentModal.useCallback[handleInputChange]"], [
         errors
@@ -3556,7 +3577,8 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                 email: formData.email.trim(),
                 password: formData.password,
                 phone: formData.phone?.trim(),
-                dob: formData.dob
+                dob: formData.dob,
+                enrollCourses: formData.enrollCourses || []
             };
             await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$studentsService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["StudentsService"].createStudent(cleanData);
             // Optimistic update - close modal immediately
@@ -3567,7 +3589,8 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                 email: "",
                 phone: "",
                 dob: "",
-                password: ""
+                password: "",
+                enrollCourses: []
             });
             setErrors({});
             // Notify parent component after modal closes
@@ -3591,7 +3614,8 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                 email: "",
                 phone: "",
                 dob: "",
-                password: ""
+                password: "",
+                enrollCourses: []
             });
             setErrors({});
             onClose();
@@ -3614,20 +3638,20 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                             children: "Create New Student"
                         }, void 0, false, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 142,
+                            lineNumber: 174,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                             children: "Add a new student to your organization. Fill in the required information below."
                         }, void 0, false, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 143,
+                            lineNumber: 175,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                    lineNumber: 141,
+                    lineNumber: 173,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -3646,13 +3670,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 152,
+                                            lineNumber: 184,
                                             columnNumber: 20
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 151,
+                                    lineNumber: 183,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3664,7 +3688,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 154,
+                                    lineNumber: 186,
                                     columnNumber: 13
                                 }, this),
                                 errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3672,13 +3696,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: errors.name
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 163,
+                                    lineNumber: 195,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 150,
+                            lineNumber: 182,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3693,13 +3717,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 168,
+                                            lineNumber: 200,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 167,
+                                    lineNumber: 199,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3712,7 +3736,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 170,
+                                    lineNumber: 202,
                                     columnNumber: 13
                                 }, this),
                                 errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3720,13 +3744,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: errors.email
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 180,
+                                    lineNumber: 212,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 166,
+                            lineNumber: 198,
                             columnNumber: 11
                         }, this),
                         " ",
@@ -3742,13 +3766,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 185,
+                                            lineNumber: 217,
                                             columnNumber: 24
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 184,
+                                    lineNumber: 216,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3761,21 +3785,21 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 187,
+                                    lineNumber: 219,
                                     columnNumber: 13
                                 }, this),
-                                errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                errors.password && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-sm text-red-500",
-                                    children: errors.email
+                                    children: errors.password
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 197,
+                                    lineNumber: 229,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 183,
+                            lineNumber: 215,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3790,13 +3814,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 202,
+                                            lineNumber: 234,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 201,
+                                    lineNumber: 233,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3809,7 +3833,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 204,
+                                    lineNumber: 236,
                                     columnNumber: 13
                                 }, this),
                                 errors.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3817,13 +3841,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: errors.phone
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 214,
+                                    lineNumber: 246,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 200,
+                            lineNumber: 232,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dayjs$2d$datetime$2d$picker$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DateTimePicker"], {
@@ -3837,7 +3861,143 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                             showTime: false
                         }, void 0, false, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 217,
+                            lineNumber: 249,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-2",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                    children: "Assigned Courses"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                    lineNumber: 260,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Select"], {
+                                    disabled: isLoading,
+                                    onValueChange: (courseId)=>{
+                                        const selected = formData.enrollCourses || [];
+                                        const updated = selected.includes(courseId) ? selected.filter((id)=>id !== courseId) : [
+                                            ...selected,
+                                            courseId
+                                        ];
+                                        handleInputChange("enrollCourses", updated);
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectTrigger"], {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectValue"], {
+                                                placeholder: `Select courses (${formData.enrollCourses?.length || 0} selected)`
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                lineNumber: 272,
+                                                columnNumber: 17
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/modals/create-student-modal.tsx",
+                                            lineNumber: 271,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
+                                            children: courses.map((assignedCourse)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectItem"], {
+                                                    value: assignedCourse.course.id.toString(),
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "flex items-center justify-between w-full",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                children: assignedCourse.course.name
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                                lineNumber: 285,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                className: "ml-2 text-xs text-gray-500",
+                                                                children: [
+                                                                    "(",
+                                                                    assignedCourse.remainingToken,
+                                                                    " tokens)"
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                                lineNumber: 286,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            formData.enrollCourses?.includes(assignedCourse.course.id.toString()) && " ✓"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                        lineNumber: 284,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                }, assignedCourse.id, false, {
+                                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                    lineNumber: 280,
+                                                    columnNumber: 19
+                                                }, this))
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/modals/create-student-modal.tsx",
+                                            lineNumber: 278,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                    lineNumber: 261,
+                                    columnNumber: 13
+                                }, this),
+                                formData.enrollCourses?.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex flex-wrap gap-1",
+                                    children: formData.enrollCourses.map((courseId)=>{
+                                        const assignedCourse = courses.find((ac)=>ac.course.id.toString() === courseId);
+                                        return assignedCourse && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded flex items-center gap-1",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    children: assignedCourse.course.name
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                    lineNumber: 309,
+                                                    columnNumber: 25
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "text-blue-600",
+                                                    children: [
+                                                        "(",
+                                                        assignedCourse.remainingToken,
+                                                        ")"
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                    lineNumber: 310,
+                                                    columnNumber: 25
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>handleInputChange("enrollCourses", formData.enrollCourses.filter((id)=>id !== courseId)),
+                                                    className: "ml-1 hover:text-blue-900",
+                                                    children: "×"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                                    lineNumber: 313,
+                                                    columnNumber: 25
+                                                }, this)
+                                            ]
+                                        }, courseId, true, {
+                                            fileName: "[project]/components/modals/create-student-modal.tsx",
+                                            lineNumber: 305,
+                                            columnNumber: 23
+                                        }, this);
+                                    })
+                                }, void 0, false, {
+                                    fileName: "[project]/components/modals/create-student-modal.tsx",
+                                    lineNumber: 298,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/modals/create-student-modal.tsx",
+                            lineNumber: 259,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -3850,7 +4010,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 228,
+                                    lineNumber: 335,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3862,7 +4022,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                 className: "h-4 w-4 mr-2 animate-spin"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                lineNumber: 239,
+                                                lineNumber: 346,
                                                 columnNumber: 19
                                             }, this),
                                             "Creating..."
@@ -3870,34 +4030,34 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     }, void 0, true) : "Create Student"
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 236,
+                                    lineNumber: 343,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 227,
+                            lineNumber: 334,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                    lineNumber: 149,
+                    lineNumber: 181,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/modals/create-student-modal.tsx",
-            lineNumber: 133,
+            lineNumber: 165,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/modals/create-student-modal.tsx",
-        lineNumber: 132,
+        lineNumber: 164,
         columnNumber: 5
     }, this);
 }
-_s(CreateStudentModal, "2GY4pH+pVw9goaLKhrIRM37w5zs=");
+_s(CreateStudentModal, "kenaibZQ8bfBkCY/sjfyFHdSoWo=");
 _c = CreateStudentModal;
 var _c;
 __turbopack_context__.k.register(_c, "CreateStudentModal");
@@ -4199,7 +4359,7 @@ function BulkUploadModal({ isOpen, onClose, onBulkUploadComplete }) {
                             phone: row.phone || row.Phone || "",
                             dob: row.dob || row.DOB || row["Date of Birth"] || "",
                             password: row.password || row.Password || "defaultPassword123",
-                            enrolledCourses: courseCodes
+                            enrollCourses: courseCodes
                         })
                 }["BulkUploadModal.useCallback[handleBulkUpload].studentsToCreate"]);
                 // Call the bulk upload API

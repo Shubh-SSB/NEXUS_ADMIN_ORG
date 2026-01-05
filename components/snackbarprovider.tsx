@@ -10,7 +10,7 @@ export default function NotistackProvider({
   return (
     <SnackbarProvider
       maxSnack={3}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       autoHideDuration={3000}
     >
       {children}

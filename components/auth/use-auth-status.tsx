@@ -51,9 +51,11 @@ export const useAuthStatus = (
         enqueueSnackbar(notificationMessage, {
           variant: "warning",
           preventDuplicate: true,
+          autoHideDuration: 3000,
+          anchorOrigin: { vertical: "bottom", horizontal: "right" },
         });
       }
-
+      // router.replace(redirectTo);
       if (onUnauthorized) {
         onUnauthorized();
       } else if (redirectTo) {

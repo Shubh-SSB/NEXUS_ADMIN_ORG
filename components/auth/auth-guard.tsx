@@ -37,7 +37,17 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
       const authenticated = checkAuth();
 
       if (!authenticated) {
-        // Redirect to login page immediately without notification
+        // Show error notification for unauthorized access
+        if (showNotification) {
+          enqueueSnackbar(notificationMessage, {
+            variant: "error",
+            preventDuplicate: true,
+            autoHideDuration: 3000,
+            anchorOrigin: { vertical: "bottom", horizontal: "right" },
+          });
+        }
+
+        // Redirect to login page
         router.replace(redirectTo);
         return;
       }

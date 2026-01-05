@@ -156,7 +156,7 @@ class CrudFactory {
             data
         };
         const fullUrl = this.getUrl(url);
-        const token = localStorage.getItem("adminToken") || "";
+        const token = localStorage.getItem("token") || "";
         options.headers = {
             ...options.headers,
             Accept: "application/json",

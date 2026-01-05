@@ -13,12 +13,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f
 ;
 function NotistackProvider({ children }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SnackbarProvider"], {
-        maxSnack: 3,
+        maxSnack: 5,
         anchorOrigin: {
             vertical: "bottom",
             horizontal: "right"
         },
-        autoHideDuration: 3000,
+        autoHideDuration: 4000,
+        preventDuplicate: true,
+        dense: true,
+        iconVariant: {
+            success: "✅",
+            error: "❌",
+            warning: "⚠️",
+            info: "ℹ️"
+        },
+        style: {
+            fontSize: "14px"
+        },
         children: children
     }, void 0, false, {
         fileName: "[project]/components/snackbarprovider.tsx",
@@ -290,10 +301,10 @@ const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotif
                             enqueueSnackbar(notificationMessage, {
                                 variant: "error",
                                 preventDuplicate: true,
-                                autoHideDuration: 3000,
+                                autoHideDuration: 4000,
                                 anchorOrigin: {
-                                    vertical: "bottom",
-                                    horizontal: "right"
+                                    vertical: "top",
+                                    horizontal: "center"
                                 }
                             });
                         }
@@ -510,15 +521,9 @@ const useAuthStatus = (options = {})=>{
             if (showNotification) {
                 enqueueSnackbar(notificationMessage, {
                     variant: "warning",
-                    preventDuplicate: true,
-                    autoHideDuration: 3000,
-                    anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "right"
-                    }
+                    preventDuplicate: true
                 });
             }
-            // router.replace(redirectTo);
             if (onUnauthorized) {
                 onUnauthorized();
             } else if (redirectTo) {
@@ -564,6 +569,84 @@ _s(useAuthStatus, "pHzx/i2pXsuLtlD/u1EEGIw+Gt4=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSnackbar"]
+    ];
+});
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/components/auth/use-unauthorized-handler.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * Hook for handling unauthorized actions and redirections
+ */ __turbopack_context__.s([
+    "useUnauthorizedHandler",
+    ()=>useUnauthorizedHandler
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/notistack/notistack.esm.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$auth$2d$context$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/auth/auth-context.tsx [app-client] (ecmascript)");
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+;
+const useUnauthorizedHandler = (options = {})=>{
+    _s();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
+    const { enqueueSnackbar } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSnackbar"])();
+    const { logout } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$auth$2d$context$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
+    const { redirectTo = "/login", showNotification = true, customMessage = "Your session has expired. Please login again." } = options;
+    /**
+   * Handle unauthorized access with notification and redirection
+   */ const handleUnauthorized = (message, clearSession = true)=>{
+        if (clearSession) {
+            logout();
+        }
+        if (showNotification) {
+            enqueueSnackbar(message || customMessage, {
+                variant: "error",
+                preventDuplicate: true,
+                autoHideDuration: 4000,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "center"
+                }
+            });
+        }
+        // Redirect with slight delay to show notification
+        setTimeout(()=>{
+            router.replace(redirectTo);
+        }, 500);
+    };
+    /**
+   * Handle session expiration specifically
+   */ const handleSessionExpired = ()=>{
+        handleUnauthorized("Your session has expired. Please login again.", true);
+    };
+    /**
+   * Handle insufficient permissions
+   */ const handleInsufficientPermissions = ()=>{
+        handleUnauthorized("You don't have permission to access this resource.", false);
+    };
+    /**
+   * Handle invalid/expired token
+   */ const handleInvalidToken = ()=>{
+        handleUnauthorized("Invalid authentication token. Please login again.", true);
+    };
+    return {
+        handleUnauthorized,
+        handleSessionExpired,
+        handleInsufficientPermissions,
+        handleInvalidToken
+    };
+};
+_s(useUnauthorizedHandler, "NLLjXiitX062mOTJ4TiSlwbPW2o=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSnackbar"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$auth$2d$context$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"]
     ];
 });
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -940,7 +1023,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$auth$2
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$protected$2d$route$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/auth/protected-route.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$logout$2d$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/auth/logout-button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$use$2d$auth$2d$status$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/auth/use-auth-status.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$use$2d$unauthorized$2d$handler$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/auth/use-unauthorized-handler.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$auth$2d$status$2d$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/auth/auth-status-card.tsx [app-client] (ecmascript)");
+;
 ;
 ;
 ;
@@ -1388,4 +1473,4 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 }),
 ]);
 
-//# sourceMappingURL=_8bae92b5._.js.map
+//# sourceMappingURL=_5c4e21af._.js.map

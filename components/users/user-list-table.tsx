@@ -50,7 +50,7 @@ export const UserListTable = forwardRef<UserListTableRef>((props, ref) => {
     pagination,
     goToPage,
     changeLimit,
-  } = useStudents({ page: 1, limit: 10 });
+  } = useStudents({ page: 0, limit: 10 });
 
   // Expose refetch method through ref
   useImperativeHandle(

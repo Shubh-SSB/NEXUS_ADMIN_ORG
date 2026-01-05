@@ -218,7 +218,7 @@ export function BulkUploadModal({
         phone: row.phone || row.Phone || "",
         dob: row.dob || row.DOB || row["Date of Birth"] || "",
         password: row.password || row.Password || "defaultPassword123",
-        enrolledCourses: courseCodes,
+        enrollCourses: courseCodes,
       }));
 
       // Call the bulk upload API

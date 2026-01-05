@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,8 +12,19 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { DateTimePicker } from "@/components/ui/dayjs-datetime-picker";
-import { StudentsService, CreateStudentData } from "@/services/studentsService";
+import {
+  StudentsService,
+  CreateStudentData,
+  AssignedCourse,
+} from "@/services/studentsService";
 import { Loader2 } from "lucide-react";
 
 interface CreateStudentModalProps {
@@ -28,22 +39,28 @@ export function CreateStudentModal({
   onStudentCreated,
 }: CreateStudentModalProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [courses, setCourses] = useState<AssignedCourse[]>([]);
   const [formData, setFormData] = useState<CreateStudentData>({
     name: "",
     email: "",
     phone: "",
     dob: "",
     password: "",
+    enrollCourses: [],
   });
   const [errors, setErrors] = useState<Partial<CreateStudentData>>({});
 
+  // Fetch courses when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      StudentsService.fetchAvailableCourses().then(setCourses);
+    }
+  }, [isOpen]);
+
   const handleInputChange = useCallback(
-    (field: keyof CreateStudentData, value: string) => {
+    (field: keyof CreateStudentData, value: string | string[]) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
-      // Clear error when user starts typing
-      if (errors[field]) {
-        setErrors((prev) => ({ ...prev, [field]: "" }));
-      }
+      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
     },
     [errors]
   );
@@ -94,6 +111,7 @@ export function CreateStudentModal({
         password: formData.password,
         phone: formData.phone?.trim(),
         dob: formData.dob,
+        enrollCourses: formData.enrollCourses || [],
       };
 
       await StudentsService.createStudent(cleanData);
@@ -102,7 +120,14 @@ export function CreateStudentModal({
       onClose();
 
       // Reset form
-      setFormData({ name: "", email: "", phone: "", dob: "", password: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        dob: "",
+        password: "",
+        enrollCourses: [],
+      });
       setErrors({});
 
       // Notify parent component after modal closes
@@ -122,7 +147,14 @@ export function CreateStudentModal({
 
   const handleClose = () => {
     if (!isLoading) {
-      setFormData({ name: "", email: "", phone: "", dob: "", password: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        dob: "",
+        password: "",
+        enrollCourses: [],
+      });
       setErrors({});
       onClose();
     }
@@ -193,8 +225,8 @@ export function CreateStudentModal({
               className={errors.password ? "border-red-500" : ""}
               disabled={isLoading}
             />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email}</p>
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -224,6 +256,81 @@ export function CreateStudentModal({
             format="YYYY-MM-DD"
             showTime={false}
           />
+          <div className="space-y-2">
+            <Label>Assigned Courses</Label>
+            <Select
+              disabled={isLoading}
+              onValueChange={(courseId) => {
+                const selected = formData.enrollCourses || [];
+                const updated = selected.includes(courseId)
+                  ? selected.filter((id) => id !== courseId)
+                  : [...selected, courseId];
+                handleInputChange("enrollCourses", updated);
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue
+                  placeholder={`Select courses (${
+                    formData.enrollCourses?.length || 0
+                  } selected)`}
+                />
+              </SelectTrigger>
+              <SelectContent>
+                {courses.map((assignedCourse) => (
+                  <SelectItem
+                    key={assignedCourse.id}
+                    value={assignedCourse.course.id.toString()}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span>{assignedCourse.course.name}</span>
+                      <span className="ml-2 text-xs text-gray-500">
+                        ({assignedCourse.remainingToken} tokens)
+                      </span>
+                      {formData.enrollCourses?.includes(
+                        assignedCourse.course.id.toString()
+                      ) && " ✓"}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {formData.enrollCourses?.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {formData.enrollCourses.map((courseId) => {
+                  const assignedCourse = courses.find(
+                    (ac) => ac.course.id.toString() === courseId
+                  );
+                  return (
+                    assignedCourse && (
+                      <span
+                        key={courseId}
+                        className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded flex items-center gap-1"
+                      >
+                        <span>{assignedCourse.course.name}</span>
+                        <span className="text-blue-600">
+                          ({assignedCourse.remainingToken})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleInputChange(
+                              "enrollCourses",
+                              formData.enrollCourses.filter(
+                                (id) => id !== courseId
+                              )
+                            )
+                          }
+                          className="ml-1 hover:text-blue-900"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    )
+                  );
+                })}
+              </div>
+            )}
+          </div>
           <DialogFooter>
             <Button
               type="button"

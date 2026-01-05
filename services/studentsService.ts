@@ -1,5 +1,14 @@
 import { $crud } from "@/factory/crudFactory";
 
+export interface AssignedCourse {
+  id: number;
+  remainingToken: number;
+  course: {
+    id: number;
+    name: string;
+  };
+}
+
 export interface StudentData {
   id: string;
   name: string;
@@ -14,7 +23,7 @@ export interface CreateStudentData {
   email: string;
   phone: string;
   dob: string;
-  enrolledCourses?: string[];
+  enrollCourses: string[];
   password: string;
 }
 
@@ -206,6 +215,19 @@ export class StudentsService {
     } catch (error) {
       console.error("Error bulk creating students:", error);
       throw error;
+    }
+  }
+
+  static async fetchAvailableCourses(): Promise<AssignedCourse[]> {
+    try {
+      const response = await $crud.get(
+        "retrieve/organization/assigned/courses"
+      );
+      // @ts-ignore
+      return response.data?.assignedCourses || [];
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      return [];
     }
   }
 }
