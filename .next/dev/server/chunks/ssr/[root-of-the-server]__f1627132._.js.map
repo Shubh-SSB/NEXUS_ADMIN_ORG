@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projekts/Projekts/NEXUS_ADMIN_ORG_GIT/app/page.tsx"],"sourcesContent":["import { CrowdCanvas } from \"@/components/ui/skiper-ui/skiper39\";\nimport { redirect } from \"next/navigation\";\n\nexport default function RootPage() {\n  return (\n    <>\n      <div className=\"min-h-screen w-full\">\n        <div className=\"relative h-screen w-full\"></div>\n      </div>\n    </>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAGe,SAAS;IACtB,qBACE;kBACE,cAAA,8WAAC;YAAI,WAAU;sBACb,cAAA,8WAAC;gBAAI,WAAU;;;;;;;;;;;;AAIvB"}}]
-}
