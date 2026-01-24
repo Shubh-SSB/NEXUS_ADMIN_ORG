@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,13 +11,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import {
@@ -28,7 +21,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { StudentsService, CreateStudentData } from "@/services/studentsService";
+import { StudentsService, AssignedCourse } from "@/services/studentsService";
 
 interface Course {
   id: string;
@@ -49,26 +42,27 @@ export function BulkUploadModal({
 }: BulkUploadModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+  const [availableCourses, setAvailableCourses] = useState<AssignedCourse[]>(
+    [],
+  );
+  const [selectedCourseIds, setSelectedCourseIds] = useState<number[]>([]);
   const [csvData, setCsvData] = useState<any[]>([]);
   const [previewData, setPreviewData] = useState<any[]>([]);
   const [uploadStep, setUploadStep] = useState<
     "upload" | "preview" | "processing"
   >("upload");
   const [error, setError] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState({
+    current: 0,
+    total: 0,
+  });
 
-  // Mock courses data - replace with actual API call
-  const availableCourses: Course[] = useMemo(
-    () => [
-      { id: "1", name: "JavaScript Fundamentals", code: "JS101" },
-      { id: "2", name: "React Development", code: "REACT101" },
-      { id: "3", name: "Node.js Backend", code: "NODE101" },
-      { id: "4", name: "Database Design", code: "DB101" },
-      { id: "5", name: "Python Programming", code: "PY101" },
-      { id: "6", name: "Machine Learning", code: "ML101" },
-    ],
-    []
-  );
+  // Fetch available courses
+  useEffect(() => {
+    if (isOpen) {
+      StudentsService.fetchAvailableCourses().then(setAvailableCourses);
+    }
+  }, [isOpen]);
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,16 +75,15 @@ export function BulkUploadModal({
         setSelectedFile(null);
       }
     },
-    []
+    [],
   );
 
-  const handleCourseToggle = useCallback((course: Course) => {
-    setSelectedCourses((prev) => {
-      const isSelected = prev.some((c) => c.id === course.id);
-      if (isSelected) {
-        return prev.filter((c) => c.id !== course.id);
+  const handleCourseToggle = useCallback((courseId: number) => {
+    setSelectedCourseIds((prev) => {
+      if (prev.includes(courseId)) {
+        return prev.filter((id) => id !== courseId);
       } else {
-        return [...prev, course];
+        return [...prev, courseId];
       }
     });
   }, []);
@@ -108,8 +101,8 @@ export function BulkUploadModal({
           if (lines.length < 2) {
             reject(
               new Error(
-                "CSV file must have at least a header row and one data row"
-              )
+                "CSV file must have at least a header row and one data row",
+              ),
             );
             return;
           }
@@ -136,7 +129,7 @@ export function BulkUploadModal({
           };
 
           const headers = parseCsvLine(lines[0]).map((h) =>
-            h.replace(/"/g, "")
+            h.replace(/"/g, ""),
           );
           const rows = lines.slice(1).map((line) => {
             const values = parseCsvLine(line).map((v) => v.replace(/"/g, ""));
@@ -151,8 +144,8 @@ export function BulkUploadModal({
           const requiredFields = ["name", "email"];
           const hasRequiredFields = requiredFields.every((field) =>
             headers.some((header) =>
-              header.toLowerCase().includes(field.toLowerCase())
-            )
+              header.toLowerCase().includes(field.toLowerCase()),
+            ),
           );
 
           if (!hasRequiredFields) {
@@ -164,8 +157,8 @@ export function BulkUploadModal({
         } catch (error) {
           reject(
             new Error(
-              "Failed to parse CSV file. Please ensure it's properly formatted."
-            )
+              "Failed to parse CSV file. Please ensure it's properly formatted.",
+            ),
           );
         }
       };
@@ -175,7 +168,7 @@ export function BulkUploadModal({
   }, []);
 
   const handlePreviewData = useCallback(async () => {
-    if (!selectedFile || selectedCourses.length === 0) {
+    if (!selectedFile || selectedCourseIds.length === 0) {
       setError("Please select both a CSV file and at least one course");
       return;
     }
@@ -187,10 +180,9 @@ export function BulkUploadModal({
       const rawData = await parseCsvFile(selectedFile);
 
       // Add enrolledCourses column with selected courses
-      const courseCodes = selectedCourses.map((course) => course.code);
       const processedData = rawData.map((row) => ({
         ...row,
-        enrolledCourses: courseCodes,
+        enrolledCourses: selectedCourseIds,
       }));
 
       setCsvData(rawData);
@@ -201,28 +193,82 @@ export function BulkUploadModal({
     } finally {
       setIsLoading(false);
     }
-  }, [selectedFile, selectedCourses, parseCsvFile]);
+  }, [selectedFile, selectedCourseIds, parseCsvFile]);
+
+  const handleClose = useCallback(() => {
+    if (!isLoading) {
+      setSelectedFile(null);
+      setSelectedCourseIds([]);
+      setCsvData([]);
+      setPreviewData([]);
+      setUploadStep("upload");
+      setError(null);
+      setUploadProgress({ current: 0, total: 0 });
+      onClose();
+    }
+  }, [isLoading, onClose]);
+
+  const addCourseIdsToCsv = useCallback(
+    (file: File, courseIds: number[]): Promise<File> => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const text = e.target?.result as string;
+            const lines = text.split("\n");
+
+            if (lines.length < 1) {
+              reject(new Error("CSV file is empty"));
+              return;
+            }
+
+            // Add courseIds column to header
+            const header = lines[0].trim();
+            const newHeader = header + ",courseIds";
+
+            // Add courseIds to each data row
+            const courseIdsValue = `"${courseIds.join(",")}"`;
+            const newLines = [newHeader];
+
+            for (let i = 1; i < lines.length; i++) {
+              const line = lines[i].trim();
+              if (line) {
+                newLines.push(line + "," + courseIdsValue);
+              }
+            }
+
+            const newCsvContent = newLines.join("\n");
+            const blob = new Blob([newCsvContent], { type: "text/csv" });
+            const newFile = new File([blob], file.name, { type: "text/csv" });
+
+            resolve(newFile);
+          } catch (error) {
+            reject(new Error("Failed to modify CSV file"));
+          }
+        };
+        reader.onerror = () => reject(new Error("Failed to read file"));
+        reader.readAsText(file);
+      });
+    },
+    [],
+  );
 
   const handleBulkUpload = useCallback(async () => {
-    if (csvData.length === 0) return;
+    if (!selectedFile || selectedCourseIds.length === 0) return;
 
     setIsLoading(true);
     setUploadStep("processing");
+    setError(null);
 
     try {
-      // Process the data with enrolled courses
-      const courseCodes = selectedCourses.map((course) => course.code);
-      const studentsToCreate: CreateStudentData[] = csvData.map((row) => ({
-        name: row.name || row.Name || "",
-        email: row.email || row.Email || "",
-        phone: row.phone || row.Phone || "",
-        dob: row.dob || row.DOB || row["Date of Birth"] || "",
-        password: row.password || row.Password || "defaultPassword123",
-        enrollCourses: courseCodes,
-      }));
+      // Add courseIds column to CSV file
+      const modifiedCsvFile = await addCourseIdsToCsv(
+        selectedFile,
+        selectedCourseIds,
+      );
 
-      // Call the bulk upload API
-      await StudentsService.bulkCreateStudents(studentsToCreate);
+      // Upload modified CSV file
+      await StudentsService.bulkCreateStudents(modifiedCsvFile);
 
       // Reset form and close modal
       handleClose();
@@ -233,19 +279,13 @@ export function BulkUploadModal({
     } finally {
       setIsLoading(false);
     }
-  }, [csvData, selectedCourses, onBulkUploadComplete]);
-
-  const handleClose = useCallback(() => {
-    if (!isLoading) {
-      setSelectedFile(null);
-      setSelectedCourses([]);
-      setCsvData([]);
-      setPreviewData([]);
-      setUploadStep("upload");
-      setError(null);
-      onClose();
-    }
-  }, [isLoading, onClose]);
+  }, [
+    selectedFile,
+    selectedCourseIds,
+    onBulkUploadComplete,
+    handleClose,
+    addCourseIdsToCsv,
+  ]);
 
   const handleBackToUpload = useCallback(() => {
     setUploadStep("upload");
@@ -265,27 +305,29 @@ export function BulkUploadModal({
           {availableCourses.map((course) => (
             <div key={course.id} className="flex items-center space-x-2 py-2">
               <Checkbox
-                id={course.id}
-                checked={selectedCourses.some((c) => c.id === course.id)}
-                onCheckedChange={() => handleCourseToggle(course)}
+                id={String(course.id)}
+                checked={selectedCourseIds.includes(course.id)}
+                onCheckedChange={() => handleCourseToggle(course.id)}
               />
               <Label
-                htmlFor={course.id}
+                htmlFor={String(course.id)}
                 className="text-sm cursor-pointer flex-1"
               >
-                {course.name} ({course.code})
+                {course.course.name} ({course.course.id})
               </Label>
             </div>
           ))}
         </div>
 
-        {selectedCourses.length > 0 && (
+        {selectedCourseIds.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
-            {selectedCourses.map((course) => (
-              <Badge key={course.id} variant="secondary">
-                {course.code}
-              </Badge>
-            ))}
+            {availableCourses
+              .filter((c) => selectedCourseIds.includes(c.id))
+              .map((course) => (
+                <Badge key={course.id} variant="secondary">
+                  {course.course.name}
+                </Badge>
+              ))}
           </div>
         )}
       </div>
@@ -325,8 +367,8 @@ export function BulkUploadModal({
           Preview Data ({csvData.length} students)
         </h4>
         <Badge variant="outline">
-          {selectedCourses.length} course
-          {selectedCourses.length !== 1 ? "s" : ""} selected
+          {selectedCourseIds.length} course
+          {selectedCourseIds.length !== 1 ? "s" : ""} selected
         </Badge>
       </div>
 
@@ -371,7 +413,7 @@ export function BulkUploadModal({
       <Loader2 className="h-8 w-8 mx-auto mb-4 animate-spin text-blue-500" />
       <h4 className="font-medium mb-2">Processing Upload</h4>
       <p className="text-sm text-muted-foreground">
-        Creating {csvData.length} students with selected courses...
+        Uploading {csvData.length} students with selected courses...
       </p>
     </div>
   );
@@ -379,7 +421,7 @@ export function BulkUploadModal({
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="sm:max-w-[600px] focus:outline-none"
+        className="max-w-1/2 focus:outline-none"
         onInteractOutside={(e) => {
           if (isLoading) {
             e.preventDefault();
@@ -421,7 +463,7 @@ export function BulkUploadModal({
               <Button
                 onClick={handlePreviewData}
                 disabled={
-                  isLoading || !selectedFile || selectedCourses.length === 0
+                  isLoading || !selectedFile || selectedCourseIds.length === 0
                 }
               >
                 {isLoading ? (

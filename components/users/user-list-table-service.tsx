@@ -31,7 +31,9 @@ export function UserListTableWithService() {
     try {
       setIsLoading(true);
       setError(null);
+      // @ts-ignore
       const data = await StudentsService.getStudent();
+      // @ts-ignore
       setStudents(data);
     } catch (err: any) {
       setError(err.message || "Failed to fetch students data");

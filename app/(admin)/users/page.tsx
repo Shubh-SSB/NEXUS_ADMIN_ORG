@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { UserListTable } from "@/components/users/user-list-table";
 import { UserFilters } from "@/components/users/user-filters";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ export default function UsersPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isBulkUploadModalOpen, setIsBulkUploadModalOpen] = useState(false);
   const tableRef = useRef<{ refetch: () => void }>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleStudentCreated = useCallback(() => {
     // Use ref to avoid re-rendering the entire table component
@@ -35,7 +36,6 @@ export default function UsersPage() {
   }, []);
 
   const handleBulkUploadComplete = useCallback(() => {
-    // Refresh the table after bulk upload
     tableRef.current?.refetch();
   }, []);
 
@@ -44,9 +44,11 @@ export default function UsersPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">
-            User Management
+            Students Management
           </h1>
-          <p className="text-muted-foreground mt-1">Manage learners</p>
+          <p className="text-muted-foreground mt-1">
+            Create and manage learners
+          </p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -67,8 +69,8 @@ export default function UsersPage() {
         </div>
       </div>
 
-      <UserFilters />
-      <UserListTable ref={tableRef} />
+      <UserFilters onSearchChange={setSearchQuery} />
+      <UserListTable ref={tableRef} searchQuery={searchQuery} />
 
       {/* Create Student Modal */}
       <CreateStudentModal

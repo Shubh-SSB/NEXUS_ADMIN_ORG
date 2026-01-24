@@ -34,8 +34,8 @@ export const PaginationControls = ({
   onPageChange,
   onLimitChange,
 }: PaginationControlsProps) => {
-  const startRecord = totalRecords === 0 ? 0 : (currentPage - 1) * limit + 1;
-  const endRecord = Math.min(currentPage * limit, totalRecords);
+  const startRecord = totalRecords === 0 ? 0 : currentPage * limit + 1;
+  const endRecord = Math.min((currentPage + 1) * limit, totalRecords);
 
   return (
     <div className="flex items-center justify-between px-2 py-4">
@@ -58,14 +58,14 @@ export const PaginationControls = ({
         </Select>
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+        <div className="flex w-25 items-center justify-center text-sm font-medium">
           {startRecord}-{endRecord} of {totalRecords}
         </div>
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() => onPageChange(1)}
+            onClick={() => onPageChange(0)}
             disabled={!hasPrevPage}
           >
             <span className="sr-only">Go to first page</span>
@@ -81,7 +81,7 @@ export const PaginationControls = ({
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm font-medium">
-            Page {currentPage} of {totalPages}
+            Page {currentPage + 1} of {totalPages}
           </span>
           <Button
             variant="outline"
@@ -95,7 +95,7 @@ export const PaginationControls = ({
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() => onPageChange(totalPages)}
+            onClick={() => onPageChange(totalPages - 1)}
             disabled={!hasNextPage}
           >
             <span className="sr-only">Go to last page</span>

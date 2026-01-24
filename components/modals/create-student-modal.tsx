@@ -78,15 +78,19 @@ export function CreateStudentModal({
       newErrors.email = "Please enter a valid email address";
     }
 
-    // Phone validation (optional but if provided should be valid)
-    if (formData.phone && formData.phone.trim()) {
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    if (!formData.phone?.trim()) {
+      newErrors.phone = "Phone is required";
+    } else {
       const phoneDigits = formData.phone.replace(/\D/g, "");
       if (phoneDigits.length !== 10) {
         newErrors.phone = "Phone number must be exactly 10 digits.";
       }
     }
 
-    // DOB validation (optional but if provided should be valid date)
     if (formData.dob && !Date.parse(formData.dob)) {
       newErrors.dob = "Please enter a valid date";
     }
@@ -103,23 +107,21 @@ export function CreateStudentModal({
     }
 
     setIsLoading(true);
-    try {
-      // Filter out empty optional fields
-      const cleanData: CreateStudentData = {
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        password: formData.password,
-        phone: formData.phone?.trim(),
-        dob: formData.dob,
-        enrollCourses: formData.enrollCourses || [],
-      };
 
+    const cleanData: CreateStudentData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      password: formData.password.trim(),
+      phone: formData.phone?.trim() || "",
+      dob: formData.dob,
+      enrollCourses: formData.enrollCourses || [],
+    };
+
+    try {
       await StudentsService.createStudent(cleanData);
 
-      // Optimistic update - close modal immediately
+      // Success - close modal and reset
       onClose();
-
-      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -130,16 +132,10 @@ export function CreateStudentModal({
       });
       setErrors({});
 
-      // Notify parent component after modal closes
-      setTimeout(() => {
-        onStudentCreated?.();
-      }, 100);
-    } catch (error: any) {
-      console.error("Error creating student:", error);
-      // Show error on email field as general error location
-      setErrors({
-        email: error.message || "Failed to create student. Please try again.",
-      });
+      setTimeout(() => onStudentCreated?.(), 100);
+    } catch (error) {
+      // Let CRUD factory handle notifications
+      console.error("Student creation failed:", error);
     } finally {
       setIsLoading(false);
     }

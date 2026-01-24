@@ -34,7 +34,7 @@ export class CrudFactory {
   async get(
     url: string,
     data: Record<string, any> = {},
-    requestOptions: RequestOptions = {}
+    requestOptions: RequestOptions = {},
   ) {
     return this.send({
       method: "GET",
@@ -47,7 +47,7 @@ export class CrudFactory {
   async post(
     url: string,
     data: Record<string, any> = {},
-    requestOptions: RequestOptions = {}
+    requestOptions: RequestOptions = {},
   ) {
     return this.send({
       method: "POST",
@@ -60,7 +60,7 @@ export class CrudFactory {
   async create(
     url: string,
     data: Record<string, any> = {},
-    requestOptions: RequestOptions = {}
+    requestOptions: RequestOptions = {},
   ) {
     return this.send({
       method: "POST",
@@ -73,7 +73,7 @@ export class CrudFactory {
   async retrieve(
     url: string,
     data: Record<string, any> = {},
-    requestOptions: RequestOptions = {}
+    requestOptions: RequestOptions = {},
   ) {
     return this.send({
       method: "GET",
@@ -86,7 +86,7 @@ export class CrudFactory {
   async update(
     url: string,
     data: Record<string, any> = {},
-    requestOptions: RequestOptions = {}
+    requestOptions: RequestOptions = {},
   ) {
     return this.send({
       method: "PUT",
@@ -99,7 +99,7 @@ export class CrudFactory {
   async delete(
     url: string,
     data: Record<string, any> = {},
-    requestOptions: RequestOptions = {}
+    requestOptions: RequestOptions = {},
   ) {
     return this.send({
       method: "DELETE",
@@ -107,6 +107,48 @@ export class CrudFactory {
       data,
       ...requestOptions,
     });
+  }
+
+  async uploadFile(
+    url: string,
+    formData: FormData,
+    requestOptions: RequestOptions = {},
+  ): Promise<ResponseData> {
+    const fullUrl = `${this.BASE_URL}${url}`;
+    const token = localStorage.getItem("token") || "";
+
+    try {
+      const response = await axios.post(fullUrl, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        validateStatus: (status) =>
+          status === 200 || status === 400 || status === 401 || status === 201,
+        ...requestOptions.ajaxOptions,
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        const res = response.data;
+        if (requestOptions.notify !== false) {
+          await this.notify({ message: res.message, type: res.type });
+        }
+        if (res.type === "error") throw res;
+        return res;
+      } else {
+        const res = response.data;
+        await this.notify({ message: res.message, type: "error" });
+        throw res;
+      }
+    } catch (e: any) {
+      if (!e.message) {
+        await this.notify({
+          message: "Something went wrong at our end.",
+          type: "error",
+        });
+      }
+      throw e;
+    }
   }
 
   async notify({ message, type }: NotifyOptions) {

@@ -262,7 +262,19 @@ const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotif
             }
             const authenticated = checkAuth();
             if (!authenticated) {
-                // Redirect to login page immediately without notification
+                // Show error notification for unauthorized access
+                if (showNotification) {
+                    enqueueSnackbar(notificationMessage, {
+                        variant: "error",
+                        preventDuplicate: true,
+                        autoHideDuration: 3000,
+                        anchorOrigin: {
+                            vertical: "bottom",
+                            horizontal: "right"
+                        }
+                    });
+                }
+                // Redirect to login page
                 router.replace(redirectTo);
                 return;
             }
@@ -305,12 +317,12 @@ function withAuthGuard(Component, options) {
                 ...props
             }, void 0, false, {
                 fileName: "[project]/components/auth/auth-guard.tsx",
-                lineNumber: 88,
+                lineNumber: 98,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/auth/auth-guard.tsx",
-            lineNumber: 87,
+            lineNumber: 97,
             columnNumber: 7
         }, this);
     };

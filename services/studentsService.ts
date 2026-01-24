@@ -6,7 +6,12 @@ export interface AssignedCourse {
   course: {
     id: number;
     name: string;
+    description: string;
   };
+}
+
+export interface FiltersProps {
+  onSearchChange: (query: string) => void;
 }
 
 export interface StudentData {
@@ -23,7 +28,7 @@ export interface CreateStudentData {
   email: string;
   phone: string;
   dob: string;
-  enrollCourses: string[];
+  enrollCourses: number[];
   password: string;
 }
 
@@ -32,7 +37,6 @@ export interface UpdateStudentData {
   email: string;
   phone?: string;
   dob?: string;
-  enrolledCourses?: string[];
 }
 
 export interface PaginationParams {
@@ -77,7 +81,7 @@ export class StudentsService {
   }
 
   static async fetchStudents(
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<StudentData[]> {
     try {
       let url = "retrieve/organization/students";
@@ -103,7 +107,7 @@ export class StudentsService {
   }
 
   static async fetchStudentsWithMeta(
-    params?: PaginationParams
+    params?: PaginationParams,
   ): Promise<PaginatedStudentsResponse> {
     try {
       let url = "retrieve/organization/students";
@@ -118,7 +122,7 @@ export class StudentsService {
         const students = response.data.rows.map(this.transformStudent);
         //   @ts-ignore
         const totalRecords = response.data.totalRecords || students.length;
-        const currentPage = params?.page || 1;
+        const currentPage = params?.page ?? 0;
         const limit = params?.limit || totalRecords;
         const totalPages = Math.ceil(totalRecords / limit);
 
@@ -127,15 +131,15 @@ export class StudentsService {
           totalRecords,
           currentPage,
           totalPages,
-          hasNextPage: currentPage < totalPages,
-          hasPrevPage: currentPage > 1,
+          hasNextPage: currentPage < totalPages - 1,
+          hasPrevPage: currentPage > 0,
         };
       } else {
         console.warn("Unexpected API response format:", response);
         return {
           students: [],
           totalRecords: 0,
-          currentPage: 1,
+          currentPage: 0,
           totalPages: 0,
           hasNextPage: false,
           hasPrevPage: false,
@@ -148,12 +152,12 @@ export class StudentsService {
   }
 
   static async createStudent(
-    studentData: CreateStudentData
+    studentData: CreateStudentData,
   ): Promise<StudentData> {
     try {
       const response = await $crud.post(
         "create/organization/student",
-        studentData
+        studentData,
       );
 
       if (response.data) {
@@ -168,12 +172,12 @@ export class StudentsService {
 
   static async updateStudent(
     id: string,
-    studentData: UpdateStudentData
+    studentData: UpdateStudentData,
   ): Promise<StudentData> {
     try {
       const response = await $crud.update(
         `update/organization/student/${id}`,
-        studentData
+        studentData,
       );
 
       if (response.data) {
@@ -200,18 +204,20 @@ export class StudentsService {
     }
   }
 
-  static async bulkCreateStudents(
-    studentsData: CreateStudentData[]
-  ): Promise<StudentData[]> {
+  static async bulkCreateStudents(csvFile: File): Promise<StudentData[]> {
     try {
-      const response = await $crud.post("create/organization/students/bulk", {
-        students: studentsData,
-      });
+      const formData = new FormData();
+      formData.append("csv", csvFile);
+
+      const response = await $crud.uploadFile(
+        "create/organization/students/bulk",
+        formData,
+      );
 
       if (response.data && Array.isArray(response.data)) {
         return response.data.map(this.transformStudent);
       }
-      throw new Error("Failed to bulk create students");
+      return [];
     } catch (error) {
       console.error("Error bulk creating students:", error);
       throw error;
@@ -221,7 +227,7 @@ export class StudentsService {
   static async fetchAvailableCourses(): Promise<AssignedCourse[]> {
     try {
       const response = await $crud.get(
-        "retrieve/organization/assigned/courses"
+        "retrieve/organization/assigned/courses",
       );
       // @ts-ignore
       return response.data?.assignedCourses || [];

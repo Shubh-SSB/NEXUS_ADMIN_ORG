@@ -36,7 +36,7 @@ const navigation = [
     roles: ["admin", "manager", "trainer"],
   },
   {
-    name: "Users",
+    name: "Students",
     href: "/users",
     icon: Users,
     roles: ["admin", "manager"],
@@ -79,7 +79,7 @@ export function AdminSidebar() {
   const currentRole = "admin"; // This would come from auth context
 
   const filteredNavigation = navigation.filter((item) =>
-    item.roles.includes(currentRole)
+    item.roles.includes(currentRole),
   );
 
   return (
@@ -87,7 +87,7 @@ export function AdminSidebar() {
       <aside
         className={cn(
           "relative flex flex-col border-r border-border bg-sidebar transition-all duration-300",
-          collapsed ? "w-16" : "w-64"
+          collapsed ? "w-16" : "w-64",
         )}
       >
         {/* Logo */}
@@ -120,7 +120,7 @@ export function AdminSidebar() {
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 )}
               >
                 <item.icon className="h-5 w-5 shrink-0" />
@@ -154,7 +154,7 @@ export function AdminSidebar() {
             <ChevronLeft
               className={cn(
                 "h-5 w-5 transition-transform",
-                collapsed && "rotate-180"
+                collapsed && "rotate-180",
               )}
             />
             {!collapsed && <span className="ml-2">Collapse</span>}

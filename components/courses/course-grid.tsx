@@ -1,72 +1,60 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState, useMemo } from "react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Progress } from "@/components/ui/progress"
-import { MoreHorizontal, Edit, Eye, Copy, Trash2, Users } from "lucide-react"
-import { mockCourses } from "@/lib/mock-data"
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-export function CourseGrid() {
+import { StudentsService } from "@/services/studentsService";
+import { AssignedCourse } from "@/services/studentsService";
+
+interface CourseGridProps {
+  searchQuery: string;
+}
+
+export function CourseGrid({ searchQuery }: CourseGridProps) {
+  const [courses, setCourses] = useState<AssignedCourse[]>([]);
+
+  useEffect(() => {
+    StudentsService.fetchAvailableCourses().then((data) => setCourses(data));
+  }, []);
+
+  const filteredCourses = useMemo(() => {
+    if (!searchQuery.trim()) return courses;
+
+    const query = searchQuery.toLowerCase();
+    return courses.filter((c) => c.course.name.toLowerCase().includes(query));
+  }, [courses, searchQuery]);
+
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {mockCourses.map((course) => (
-        <Card key={course.id} className="overflow-hidden">
-          <div className="aspect-video w-full bg-gradient-to-br from-primary/20 to-primary/5" />
-          <CardHeader>
-            <div className="flex items-start justify-between">
-              <Badge variant={course.status === "published" ? "default" : "secondary"} className="capitalize">
-                {course.status}
-              </Badge>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Eye className="h-4 w-4" />
-                    Preview
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Edit className="h-4 w-4" />
-                    Edit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Copy className="h-4 w-4" />
-                    Duplicate
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem variant="destructive">
-                    <Trash2 className="h-4 w-4" />
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-            <CardTitle className="line-clamp-2 text-balance">{course.title}</CardTitle>
-            <CardDescription className="line-clamp-2 text-balance">{course.description}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <Users className="h-4 w-4" />
-                <span>{course.enrolledCount} enrolled</span>
-              </div>
-              <span className="font-medium">{course.completionRate}% complete</span>
-            </div>
-            <Progress value={course.completionRate} />
-          </CardContent>
-        </Card>
-      ))}
+      {filteredCourses.length === 0 && courses.length > 0 ? (
+        <div className="col-span-full text-center py-8 text-muted-foreground">
+          No courses found matching "{searchQuery}"
+        </div>
+      ) : (
+        filteredCourses.map((c) => (
+          <Card key={c.id} className="overflow-hidden border-foreground/50">
+            <CardHeader>
+              <CardTitle className="line-clamp-2 text-balance">
+                <div className="flex justify-between items-start gap-2">
+                  {c.course.name}
+                  <span className="text-sm font-medium text-main-bg">
+                    Remaining Tokens :{" "}
+                    <span className="text-white">{c.remainingToken}</span>
+                  </span>
+                </div>
+              </CardTitle>
+              <CardDescription className="line-clamp-2 text-balance">
+                {c.course.description}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        ))
+      )}
     </div>
-  )
+  );
 }

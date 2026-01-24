@@ -67,6 +67,46 @@ class CrudFactory {
             ...requestOptions
         });
     }
+    async uploadFile(url, formData, requestOptions = {}) {
+        const fullUrl = `${this.BASE_URL}${url}`;
+        const token = localStorage.getItem("token") || "";
+        try {
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(fullUrl, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data"
+                },
+                validateStatus: (status)=>status === 200 || status === 400 || status === 401 || status === 201,
+                ...requestOptions.ajaxOptions
+            });
+            if (response.status === 200 || response.status === 201) {
+                const res = response.data;
+                if (requestOptions.notify !== false) {
+                    await this.notify({
+                        message: res.message,
+                        type: res.type
+                    });
+                }
+                if (res.type === "error") throw res;
+                return res;
+            } else {
+                const res = response.data;
+                await this.notify({
+                    message: res.message,
+                    type: "error"
+                });
+                throw res;
+            }
+        } catch (e) {
+            if (!e.message) {
+                await this.notify({
+                    message: "Something went wrong at our end.",
+                    type: "error"
+                });
+            }
+            throw e;
+        }
+    }
     async notify({ message, type }) {
         if (message) {
             console.log(message, "message");

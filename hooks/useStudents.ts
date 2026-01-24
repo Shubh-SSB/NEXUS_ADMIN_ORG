@@ -13,14 +13,14 @@ export const useStudents = (initialParams?: PaginationParams) => {
     {
       students: [],
       totalRecords: 0,
-      currentPage: 1,
+      currentPage: 0,
       totalPages: 0,
       hasNextPage: false,
       hasPrevPage: false,
-    }
+    },
   );
   const [pagination, setPagination] = useState<PaginationParams>(
-    initialParams || { page: 1, limit: 10 }
+    initialParams || { page: 0, limit: 10 },
   );
 
   const fetchStudents = async (params?: PaginationParams) => {
@@ -38,7 +38,7 @@ export const useStudents = (initialParams?: PaginationParams) => {
       setPaginatedData({
         students: [],
         totalRecords: 0,
-        currentPage: 1,
+        currentPage: 0,
         totalPages: 0,
         hasNextPage: false,
         hasPrevPage: false,
@@ -49,13 +49,13 @@ export const useStudents = (initialParams?: PaginationParams) => {
   };
 
   const goToPage = (page: number) => {
-    if (page >= 1 && page <= paginatedData.totalPages) {
+    if (page >= 0 && page <= paginatedData.totalPages - 1) {
       fetchStudents({ ...pagination, page });
     }
   };
 
   const changeLimit = (limit: number) => {
-    fetchStudents({ page: 1, limit });
+    fetchStudents({ page: 0, limit });
   };
 
   const nextPage = () => {
