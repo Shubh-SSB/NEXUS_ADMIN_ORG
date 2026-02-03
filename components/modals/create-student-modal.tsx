@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useFormik } from "formik";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -26,6 +27,7 @@ import {
   AssignedCourse,
 } from "@/services/studentsService";
 import { Loader2 } from "lucide-react";
+import validationSchema from "@/schema";
 
 interface CreateStudentModalProps {
   isOpen: boolean;
@@ -40,15 +42,6 @@ export function CreateStudentModal({
 }: CreateStudentModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState<AssignedCourse[]>([]);
-  const [formData, setFormData] = useState<CreateStudentData>({
-    name: "",
-    email: "",
-    phone: "",
-    dob: "",
-    password: "",
-    enrollCourses: [],
-  });
-  const [errors, setErrors] = useState<Partial<CreateStudentData>>({});
 
   // Fetch courses when modal opens
   useEffect(() => {
@@ -57,109 +50,64 @@ export function CreateStudentModal({
     }
   }, [isOpen]);
 
-  const handleInputChange = useCallback(
-    (field: keyof CreateStudentData, value: string | string[]) => {
-      setFormData((prev) => ({ ...prev, [field]: value }));
-      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+  const formik = useFormik<CreateStudentData>({
+    initialValues: {
+      name: "",
+      email: "",
+      phone: "",
+      dob: "",
+      password: "",
+      enrollCourses: [],
     },
-    [errors]
-  );
+    validationSchema: validationSchema("createStudent"),
+    onSubmit: async (values) => {
+      setIsLoading(true);
 
-  const validateForm = (): boolean => {
-    const newErrors: Partial<CreateStudentData> = {};
+      const cleanData: CreateStudentData = {
+        name: values.name.trim(),
+        email: values.email.trim(),
+        password: values.password.trim(),
+        phone: values.phone?.trim() || "",
+        dob: values.dob,
+        enrollCourses: values.enrollCourses || [],
+      };
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
+      try {
+        await StudentsService.createStudent(cleanData);
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
+        // Success - close modal and reset
+        onClose();
+        formik.resetForm();
 
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-    }
-
-    if (!formData.phone?.trim()) {
-      newErrors.phone = "Phone is required";
-    } else {
-      const phoneDigits = formData.phone.replace(/\D/g, "");
-      if (phoneDigits.length !== 10) {
-        newErrors.phone = "Phone number must be exactly 10 digits.";
+        setTimeout(() => onStudentCreated?.(), 100);
+      } catch (error) {
+        // Let CRUD factory handle notifications
+        console.error("Student creation failed:", error);
+      } finally {
+        setIsLoading(false);
       }
-    }
-
-    if (formData.dob && !Date.parse(formData.dob)) {
-      newErrors.dob = "Please enter a valid date";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsLoading(true);
-
-    const cleanData: CreateStudentData = {
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      password: formData.password.trim(),
-      phone: formData.phone?.trim() || "",
-      dob: formData.dob,
-      enrollCourses: formData.enrollCourses || [],
-    };
-
-    try {
-      await StudentsService.createStudent(cleanData);
-
-      // Success - close modal and reset
-      onClose();
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        dob: "",
-        password: "",
-        enrollCourses: [],
-      });
-      setErrors({});
-
-      setTimeout(() => onStudentCreated?.(), 100);
-    } catch (error) {
-      // Let CRUD factory handle notifications
-      console.error("Student creation failed:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    },
+  });
 
   const handleClose = () => {
     if (!isLoading) {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        dob: "",
-        password: "",
-        enrollCourses: [],
-      });
-      setErrors({});
+      formik.resetForm();
       onClose();
     }
+  };
+
+  const handleCourseToggle = (courseId: number) => {
+    const selected = formik.values.enrollCourses || [];
+    const updated = selected.includes(courseId)
+      ? selected.filter((id) => id !== courseId)
+      : [...selected, courseId];
+    formik.setFieldValue("enrollCourses", updated);
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="sm:max-w-[425px] focus:outline-none"
+        className="sm:max-w-106.25 focus:outline-none"
         onInteractOutside={(e) => {
           if (isLoading) {
             e.preventDefault();
@@ -174,21 +122,27 @@ export function CreateStudentModal({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={formik.handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">
               Name <span className="text-red-500">*</span>
             </Label>
             <Input
               id="name"
-              value={formData.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Enter student name"
-              className={errors.name ? "border-red-500" : ""}
+              className={
+                formik.touched.name && formik.errors.name
+                  ? "border-red-500"
+                  : ""
+              }
               disabled={isLoading}
             />
-            {errors.name && (
-              <p className="text-sm text-red-500">{errors.name}</p>
+            {formik.touched.name && formik.errors.name && (
+              <p className="text-sm text-red-500">{formik.errors.name}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -197,32 +151,44 @@ export function CreateStudentModal({
             </Label>
             <Input
               id="email"
+              name="email"
               type="email"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Enter email address"
-              className={errors.email ? "border-red-500" : ""}
+              className={
+                formik.touched.email && formik.errors.email
+                  ? "border-red-500"
+                  : ""
+              }
               disabled={isLoading}
             />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email}</p>
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-sm text-red-500">{formik.errors.email}</p>
             )}
-          </div>{" "}
+          </div>
           <div className="space-y-2">
-            <Label htmlFor="email">
+            <Label htmlFor="password">
               Password <span className="text-red-500">*</span>
             </Label>
             <Input
-              id="passsword"
+              id="password"
+              name="password"
               type="password"
-              value={formData.password}
-              onChange={(e) => handleInputChange("password", e.target.value)}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Enter password"
-              className={errors.password ? "border-red-500" : ""}
+              className={
+                formik.touched.password && formik.errors.password
+                  ? "border-red-500"
+                  : ""
+              }
               disabled={isLoading}
             />
-            {errors.password && (
-              <p className="text-sm text-red-500">{errors.password}</p>
+            {formik.touched.password && formik.errors.password && (
+              <p className="text-sm text-red-500">{formik.errors.password}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -231,24 +197,34 @@ export function CreateStudentModal({
             </Label>
             <Input
               id="phone"
+              name="phone"
               type="tel"
-              value={formData.phone}
-              onChange={(e) => handleInputChange("phone", e.target.value)}
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Enter phone number"
-              className={errors.phone ? "border-red-500" : ""}
+              className={
+                formik.touched.phone && formik.errors.phone
+                  ? "border-red-500"
+                  : ""
+              }
               disabled={isLoading}
             />
-            {errors.phone && (
-              <p className="text-sm text-red-500">{errors.phone}</p>
+            {formik.touched.phone && formik.errors.phone && (
+              <p className="text-sm text-red-500">{formik.errors.phone}</p>
             )}
           </div>
           <DateTimePicker
             label="Date of Birth"
-            value={formData.dob}
-            onChange={(date) => handleInputChange("dob", date)}
+            value={formik.values.dob}
+            onChange={(date) => formik.setFieldValue("dob", date)}
             placeholder="Select date of birth"
             disabled={isLoading}
-            error={errors.dob}
+            error={
+              formik.touched.dob && formik.errors.dob
+                ? formik.errors.dob
+                : undefined
+            }
             format="YYYY-MM-DD"
             showTime={false}
           />
@@ -256,25 +232,19 @@ export function CreateStudentModal({
             <Label>Assigned Courses</Label>
             <Select
               disabled={isLoading}
-              onValueChange={(courseId) => {
-                const selected = formData.enrollCourses || [];
-                const updated = selected.includes(courseId)
-                  ? selected.filter((id) => id !== courseId)
-                  : [...selected, courseId];
-                handleInputChange("enrollCourses", updated);
-              }}
+              onValueChange={(courseId) => handleCourseToggle(Number(courseId))}
             >
               <SelectTrigger>
                 <SelectValue
                   placeholder={`Select courses (${
-                    formData.enrollCourses?.length || 0
+                    formik.values.enrollCourses?.length || 0
                   } selected)`}
                 />
               </SelectTrigger>
               <SelectContent>
-                {courses.map((assignedCourse) => (
+                {courses.map((assignedCourse, index) => (
                   <SelectItem
-                    key={assignedCourse.id}
+                    key={index}
                     value={assignedCourse.course.id.toString()}
                   >
                     <div className="flex items-center justify-between w-full">
@@ -282,50 +252,44 @@ export function CreateStudentModal({
                       <span className="ml-2 text-xs text-gray-500">
                         ({assignedCourse.remainingToken} tokens)
                       </span>
-                      {formData.enrollCourses?.includes(
-                        assignedCourse.course.id.toString()
+                      {formik.values.enrollCourses?.includes(
+                        assignedCourse.course.id,
                       ) && " ✓"}
                     </div>
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            {formData.enrollCourses?.length > 0 && (
-              <div className="flex flex-wrap gap-1">
-                {formData.enrollCourses.map((courseId) => {
-                  const assignedCourse = courses.find(
-                    (ac) => ac.course.id.toString() === courseId
-                  );
-                  return (
-                    assignedCourse && (
-                      <span
-                        key={courseId}
-                        className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded flex items-center gap-1"
-                      >
-                        <span>{assignedCourse.course.name}</span>
-                        <span className="text-blue-600">
-                          ({assignedCourse.remainingToken})
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleInputChange(
-                              "enrollCourses",
-                              formData.enrollCourses.filter(
-                                (id) => id !== courseId
-                              )
-                            )
-                          }
-                          className="ml-1 hover:text-blue-900"
+            {formik.values.enrollCourses &&
+              formik.values.enrollCourses.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {formik.values.enrollCourses.map((courseId) => {
+                    const assignedCourse = courses.find(
+                      (ac) => ac.course.id === courseId,
+                    );
+                    return (
+                      assignedCourse && (
+                        <span
+                          key={courseId}
+                          className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded flex items-center gap-1"
                         >
-                          ×
-                        </button>
-                      </span>
-                    )
-                  );
-                })}
-              </div>
-            )}
+                          <span>{assignedCourse.course.name}</span>
+                          <span className="text-blue-600">
+                            ({assignedCourse.remainingToken})
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleCourseToggle(courseId)}
+                            className="ml-1 hover:text-blue-900"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      )
+                    );
+                  })}
+                </div>
+              )}
           </div>
           <DialogFooter>
             <Button

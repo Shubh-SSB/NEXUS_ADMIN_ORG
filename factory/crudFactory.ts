@@ -25,7 +25,7 @@ interface ResponseData {
 export class CrudFactory {
   dateFormat: string = "MMMM Do YYYY hh:mm A";
   BASE_URL: string = "https://nexus-backend-sghn.onrender.com/api/";
-  // BASE_URL: string = "http://192.168.0.107:8000/api/";
+  // BASE_URL: string = "http://192.168.244.90:9000/api/";
 
   getUrl(...segments: string[]): string {
     return segments.reduce((url, segment) => url + segment, "");

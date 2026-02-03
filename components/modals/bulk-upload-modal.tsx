@@ -56,6 +56,8 @@ export function BulkUploadModal({
     current: 0,
     total: 0,
   });
+  const [csvHasCourseIds, setCsvHasCourseIds] = useState(false);
+  const [existingCourseIds, setExistingCourseIds] = useState<number[]>([]);
 
   // Fetch available courses
   useEffect(() => {
@@ -88,88 +90,132 @@ export function BulkUploadModal({
     });
   }, []);
 
-  const parseCsvFile = useCallback((file: File): Promise<any[]> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const text = e.target?.result as string;
+  const parseCsvFile = useCallback(
+    (
+      file: File,
+    ): Promise<{
+      rows: any[];
+      hasCourseIds: boolean;
+      existingCourseIds: number[];
+    }> => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const text = e.target?.result as string;
 
-          // Simple CSV parsing (handles basic cases)
-          const lines = text.split("\n").filter((line) => line.trim());
+            // Simple CSV parsing (handles basic cases)
+            const lines = text.split("\n").filter((line) => line.trim());
 
-          if (lines.length < 2) {
-            reject(
-              new Error(
-                "CSV file must have at least a header row and one data row",
+            if (lines.length < 2) {
+              reject(
+                new Error(
+                  "CSV file must have at least a header row and one data row",
+                ),
+              );
+              return;
+            }
+
+            // Parse CSV with proper handling of quotes and commas
+            const parseCsvLine = (line: string): string[] => {
+              const result: string[] = [];
+              let current = "";
+              let inQuotes = false;
+
+              for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                  inQuotes = !inQuotes;
+                } else if (char === "," && !inQuotes) {
+                  result.push(current.trim());
+                  current = "";
+                } else {
+                  current += char;
+                }
+              }
+              result.push(current.trim());
+              return result;
+            };
+
+            const headers = parseCsvLine(lines[0]).map((h) =>
+              h.replace(/"/g, ""),
+            );
+
+            // Check if CSV has courseIds column
+            const courseIdsColumnIndex = headers.findIndex(
+              (h) => h.toLowerCase() === "courseids",
+            );
+            const hasCourseIds = courseIdsColumnIndex !== -1;
+
+            // Collect all unique existing courseIds from CSV
+            const allExistingCourseIds = new Set<number>();
+
+            const rows = lines.slice(1).map((line) => {
+              const values = parseCsvLine(line).map((v) => v.replace(/"/g, ""));
+              const row: any = {};
+              headers.forEach((header, index) => {
+                row[header] = values[index] || "";
+              });
+
+              // Extract existing courseIds if present
+              if (hasCourseIds && row.courseIds) {
+                try {
+                  // Try parsing as JSON array first
+                  const parsed = JSON.parse(row.courseIds);
+                  if (Array.isArray(parsed)) {
+                    parsed.forEach((id: number) =>
+                      allExistingCourseIds.add(Number(id)),
+                    );
+                  }
+                } catch {
+                  // If not JSON, try comma-separated
+                  const ids = row.courseIds
+                    .split(",")
+                    .map((id: string) => Number(id.trim()))
+                    .filter((id: number) => !isNaN(id));
+                  ids.forEach((id: number) => allExistingCourseIds.add(id));
+                }
+              }
+
+              return row;
+            });
+
+            // Validate required fields
+            const requiredFields = ["name", "email"];
+            const hasRequiredFields = requiredFields.every((field) =>
+              headers.some((header) =>
+                header.toLowerCase().includes(field.toLowerCase()),
               ),
             );
-            return;
-          }
 
-          // Parse CSV with proper handling of quotes and commas
-          const parseCsvLine = (line: string): string[] => {
-            const result: string[] = [];
-            let current = "";
-            let inQuotes = false;
-
-            for (let i = 0; i < line.length; i++) {
-              const char = line[i];
-              if (char === '"') {
-                inQuotes = !inQuotes;
-              } else if (char === "," && !inQuotes) {
-                result.push(current.trim());
-                current = "";
-              } else {
-                current += char;
-              }
+            if (!hasRequiredFields) {
+              reject(new Error("CSV must contain 'name' and 'email' columns"));
+              return;
             }
-            result.push(current.trim());
-            return result;
-          };
 
-          const headers = parseCsvLine(lines[0]).map((h) =>
-            h.replace(/"/g, ""),
-          );
-          const rows = lines.slice(1).map((line) => {
-            const values = parseCsvLine(line).map((v) => v.replace(/"/g, ""));
-            const row: any = {};
-            headers.forEach((header, index) => {
-              row[header] = values[index] || "";
+            resolve({
+              rows,
+              hasCourseIds,
+              existingCourseIds: Array.from(allExistingCourseIds),
             });
-            return row;
-          });
-
-          // Validate required fields
-          const requiredFields = ["name", "email"];
-          const hasRequiredFields = requiredFields.every((field) =>
-            headers.some((header) =>
-              header.toLowerCase().includes(field.toLowerCase()),
-            ),
-          );
-
-          if (!hasRequiredFields) {
-            reject(new Error("CSV must contain 'name' and 'email' columns"));
-            return;
+          } catch (error) {
+            reject(
+              new Error(
+                "Failed to parse CSV file. Please ensure it's properly formatted.",
+              ),
+            );
           }
-
-          resolve(rows);
-        } catch (error) {
-          reject(
-            new Error(
-              "Failed to parse CSV file. Please ensure it's properly formatted.",
-            ),
-          );
-        }
-      };
-      reader.onerror = () => reject(new Error("Failed to read file"));
-      reader.readAsText(file);
-    });
-  }, []);
+        };
+        reader.onerror = () => reject(new Error("Failed to read file"));
+        reader.readAsText(file);
+      });
+    },
+    [],
+  );
 
   const handlePreviewData = useCallback(async () => {
-    if (!selectedFile || selectedCourseIds.length === 0) {
-      setError("Please select both a CSV file and at least one course");
+    if (!selectedFile) {
+      setError("Please select a CSV file");
       return;
     }
 
@@ -177,12 +223,33 @@ export function BulkUploadModal({
     setError(null);
 
     try {
-      const rawData = await parseCsvFile(selectedFile);
+      const {
+        rows: rawData,
+        hasCourseIds,
+        existingCourseIds: csvCourseIds,
+      } = await parseCsvFile(selectedFile);
 
-      // Add enrolledCourses column with selected courses
+      setCsvHasCourseIds(hasCourseIds);
+      setExistingCourseIds(csvCourseIds);
+
+      // If CSV doesn't have courseIds and no courses selected, show error
+      if (!hasCourseIds && selectedCourseIds.length === 0) {
+        setError(
+          "CSV doesn't have courseIds column. Please select at least one course.",
+        );
+        setIsLoading(false);
+        return;
+      }
+
+      // Merge existing courseIds from CSV with selected ones
+      const mergedCourseIds = [
+        ...new Set([...csvCourseIds, ...selectedCourseIds]),
+      ];
+
+      // Add/update courseIds column with merged courses
       const processedData = rawData.map((row) => ({
         ...row,
-        enrolledCourses: selectedCourseIds,
+        courseIds: mergedCourseIds,
       }));
 
       setCsvData(rawData);
@@ -204,12 +271,18 @@ export function BulkUploadModal({
       setUploadStep("upload");
       setError(null);
       setUploadProgress({ current: 0, total: 0 });
+      setCsvHasCourseIds(false);
+      setExistingCourseIds([]);
       onClose();
     }
   }, [isLoading, onClose]);
 
   const addCourseIdsToCsv = useCallback(
-    (file: File, courseIds: number[]): Promise<File> => {
+    (
+      file: File,
+      courseIds: number[],
+      hasCourseIdsColumn: boolean,
+    ): Promise<File> => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -222,26 +295,68 @@ export function BulkUploadModal({
               return;
             }
 
-            // Add courseIds column to header
-            const header = lines[0].trim();
-            const newHeader = header + ",courseIds";
+            const courseIdsValue = `"${JSON.stringify(courseIds)}"`;
 
-            // Add courseIds to each data row
-            const courseIdsValue = `"${courseIds.join(",")}"`;
-            const newLines = [newHeader];
+            if (hasCourseIdsColumn) {
+              // Update existing courseIds column
+              const parseCsvLine = (line: string): string[] => {
+                const result: string[] = [];
+                let current = "";
+                let inQuotes = false;
 
-            for (let i = 1; i < lines.length; i++) {
-              const line = lines[i].trim();
-              if (line) {
-                newLines.push(line + "," + courseIdsValue);
+                for (let i = 0; i < line.length; i++) {
+                  const char = line[i];
+                  if (char === '"') {
+                    inQuotes = !inQuotes;
+                  } else if (char === "," && !inQuotes) {
+                    result.push(current);
+                    current = "";
+                  } else {
+                    current += char;
+                  }
+                }
+                result.push(current);
+                return result;
+              };
+
+              const headers = parseCsvLine(lines[0].trim());
+              const courseIdsIndex = headers.findIndex(
+                (h) => h.replace(/"/g, "").toLowerCase() === "courseids",
+              );
+
+              const newLines = [lines[0].trim()];
+
+              for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line) {
+                  const values = parseCsvLine(line);
+                  values[courseIdsIndex] = courseIdsValue;
+                  newLines.push(values.join(","));
+                }
               }
+
+              const newCsvContent = newLines.join("\n");
+              const blob = new Blob([newCsvContent], { type: "text/csv" });
+              const newFile = new File([blob], file.name, { type: "text/csv" });
+              resolve(newFile);
+            } else {
+              // Add new courseIds column
+              const header = lines[0].trim();
+              const newHeader = header + ",courseIds";
+              const newLines = [newHeader];
+
+              for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line) {
+                  newLines.push(line + "," + courseIdsValue);
+                }
+              }
+
+              const newCsvContent = newLines.join("\n");
+              const blob = new Blob([newCsvContent], { type: "text/csv" });
+              const newFile = new File([blob], file.name, { type: "text/csv" });
+              resolve(newFile);
             }
-
-            const newCsvContent = newLines.join("\n");
-            const blob = new Blob([newCsvContent], { type: "text/csv" });
-            const newFile = new File([blob], file.name, { type: "text/csv" });
-
-            resolve(newFile);
           } catch (error) {
             reject(new Error("Failed to modify CSV file"));
           }
@@ -254,17 +369,28 @@ export function BulkUploadModal({
   );
 
   const handleBulkUpload = useCallback(async () => {
-    if (!selectedFile || selectedCourseIds.length === 0) return;
+    if (!selectedFile) return;
+
+    // Merge existing courseIds from CSV with selected ones
+    const mergedCourseIds = [
+      ...new Set([...existingCourseIds, ...selectedCourseIds]),
+    ];
+
+    if (mergedCourseIds.length === 0) {
+      setError("Please select at least one course");
+      return;
+    }
 
     setIsLoading(true);
     setUploadStep("processing");
     setError(null);
 
     try {
-      // Add courseIds column to CSV file
+      // Add/update courseIds column in CSV file
       const modifiedCsvFile = await addCourseIdsToCsv(
         selectedFile,
-        selectedCourseIds,
+        mergedCourseIds,
+        csvHasCourseIds,
       );
 
       // Upload modified CSV file
@@ -282,6 +408,8 @@ export function BulkUploadModal({
   }, [
     selectedFile,
     selectedCourseIds,
+    existingCourseIds,
+    csvHasCourseIds,
     onBulkUploadComplete,
     handleClose,
     addCourseIdsToCsv,
@@ -299,18 +427,23 @@ export function BulkUploadModal({
       {/* Course Selection */}
       <div className="space-y-3">
         <Label>
-          Select Courses <span className="text-red-500">*</span>
+          Select Courses{" "}
+          {!csvHasCourseIds && <span className="text-red-500">*</span>}
+          <span className="text-xs text-muted-foreground ml-2">
+            (Optional if CSV has courseIds column)
+          </span>
         </Label>
         <div className="border rounded-md p-3 max-h-40 overflow-y-auto">
-          {availableCourses.map((course) => (
-            <div key={course.id} className="flex items-center space-x-2 py-2">
+          {availableCourses.map((course, index) => (
+            <div key={index} className="flex items-center  space-x-2 py-2">
               <Checkbox
-                id={String(course.id)}
-                checked={selectedCourseIds.includes(course.id)}
-                onCheckedChange={() => handleCourseToggle(course.id)}
+                id={String(course.course.id)}
+                checked={selectedCourseIds.includes(course.course.id)}
+                onCheckedChange={() => handleCourseToggle(course.course.id)}
+                className="cursor-pointer focus:ring-0 border border-main-bg/55 accent-main-bg/55"
               />
               <Label
-                htmlFor={String(course.id)}
+                htmlFor={String(course.course.id)}
                 className="text-sm cursor-pointer flex-1"
               >
                 {course.course.name} ({course.course.id})
@@ -322,9 +455,9 @@ export function BulkUploadModal({
         {selectedCourseIds.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
             {availableCourses
-              .filter((c) => selectedCourseIds.includes(c.id))
-              .map((course) => (
-                <Badge key={course.id} variant="secondary">
+              .filter((c) => selectedCourseIds.includes(c.course.id))
+              .map((course, index) => (
+                <Badge key={index} variant="secondary">
                   {course.course.name}
                 </Badge>
               ))}
@@ -354,59 +487,113 @@ export function BulkUploadModal({
         </div>
         <p className="text-xs text-muted-foreground">
           CSV should contain columns: name, email, phone, dob (optional),
-          password (optional)
+          password (optional), courseIds (optional - if not present, select
+          courses above)
         </p>
       </div>
     </div>
   );
 
-  const renderPreviewStep = () => (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h4 className="font-medium">
-          Preview Data ({csvData.length} students)
-        </h4>
-        <Badge variant="outline">
-          {selectedCourseIds.length} course
-          {selectedCourseIds.length !== 1 ? "s" : ""} selected
-        </Badge>
-      </div>
+  const renderPreviewStep = () => {
+    const mergedCourseIds = [
+      ...new Set([...existingCourseIds, ...selectedCourseIds]),
+    ];
 
-      <div className="border rounded-md overflow-hidden">
-        <div className="max-h-60 overflow-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-muted/50">
-              <tr>
-                {previewData[0] &&
-                  Object.keys(previewData[0]).map((header) => (
-                    <th key={header} className="px-3 py-2 text-left border-b">
-                      {header}
-                    </th>
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {previewData.map((row, index) => (
-                <tr key={index} className="border-b">
-                  {Object.values(row).map((value, colIndex) => (
-                    <td key={colIndex} className="px-3 py-2">
-                      {Array.isArray(value) ? value.join(", ") : String(value)}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h4 className="font-medium">
+            Preview Data ({csvData.length} students)
+          </h4>
+          <Badge variant="outline">
+            {mergedCourseIds.length} course
+            {mergedCourseIds.length !== 1 ? "s" : ""} total
+          </Badge>
         </div>
-      </div>
 
-      {csvData.length > 5 && (
-        <p className="text-xs text-muted-foreground">
-          Showing first 5 rows of {csvData.length} total students
-        </p>
-      )}
-    </div>
-  );
+        {/* Show course breakdown */}
+        {(existingCourseIds.length > 0 || selectedCourseIds.length > 0) && (
+          <div className="space-y-2 p-3 bg-muted/30 rounded-md">
+            {existingCourseIds.length > 0 && (
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-xs text-muted-foreground">From CSV:</span>
+                {existingCourseIds.map((id) => {
+                  const course = availableCourses.find(
+                    (c) => c.course.id === id,
+                  );
+                  return (
+                    <Badge key={id} variant="outline" className="text-xs">
+                      {course?.course.name || `Course ${id}`}
+                    </Badge>
+                  );
+                })}
+              </div>
+            )}
+            {selectedCourseIds.length > 0 && (
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-xs text-muted-foreground">Added:</span>
+                {selectedCourseIds
+                  .filter((id) => !existingCourseIds.includes(id))
+                  .map((id) => {
+                    const course = availableCourses.find(
+                      (c) => c.course.id === id,
+                    );
+                    return (
+                      <Badge key={id} variant="secondary" className="text-xs">
+                        {course?.course.name || `Course ${id}`}
+                      </Badge>
+                    );
+                  })}
+                {selectedCourseIds.filter(
+                  (id) => !existingCourseIds.includes(id),
+                ).length === 0 && (
+                  <span className="text-xs text-muted-foreground italic">
+                    None (all already in CSV)
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="border rounded-md overflow-hidden">
+          <div className="max-h-60 overflow-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50">
+                <tr>
+                  {previewData[0] &&
+                    Object.keys(previewData[0]).map((header) => (
+                      <th key={header} className="px-3 py-2 text-left border-b">
+                        {header}
+                      </th>
+                    ))}
+                </tr>
+              </thead>
+              <tbody>
+                {previewData.map((row, index) => (
+                  <tr key={index} className="border-b">
+                    {Object.values(row).map((value, colIndex) => (
+                      <td key={colIndex} className="px-3 py-2">
+                        {Array.isArray(value)
+                          ? value.join(", ")
+                          : String(value)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {csvData.length > 5 && (
+          <p className="text-xs text-muted-foreground">
+            Showing first 5 rows of {csvData.length} total students
+          </p>
+        )}
+      </div>
+    );
+  };
 
   const renderProcessingStep = () => (
     <div className="text-center py-8">
@@ -421,7 +608,7 @@ export function BulkUploadModal({
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="max-w-1/2 focus:outline-none"
+        className="max-w-1/2 focus:outline-none border border-main-bg/55"
         onInteractOutside={(e) => {
           if (isLoading) {
             e.preventDefault();
@@ -462,9 +649,8 @@ export function BulkUploadModal({
               </Button>
               <Button
                 onClick={handlePreviewData}
-                disabled={
-                  isLoading || !selectedFile || selectedCourseIds.length === 0
-                }
+                disabled={isLoading || !selectedFile}
+                className="cursor-pointer bg-main-bg hover:bg-main-bg/55"
               >
                 {isLoading ? (
                   <>

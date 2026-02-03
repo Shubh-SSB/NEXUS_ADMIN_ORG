@@ -42,6 +42,7 @@ export interface UpdateStudentData {
 export interface PaginationParams {
   page: number;
   limit: number;
+  search?: string;
 }
 
 export interface PaginatedStudentsResponse {
@@ -107,15 +108,15 @@ export class StudentsService {
   }
 
   static async fetchStudentsWithMeta(
-    params?: PaginationParams,
+    params?: PaginationParams & { search?: string },
   ): Promise<PaginatedStudentsResponse> {
     try {
-      let url = "retrieve/organization/students";
-      if (params) {
-        url += `?page=${params.page}&limit=${params.limit}`;
-      }
-
-      const response = await $crud.get(url);
+      // const url = "retrieve/organization/students";
+      const response = await $crud.get(
+        `retrieve/organization/students?page=${
+          params?.page
+        }&limit=${params?.limit}&search=${params?.search || ""}`,
+      );
       // @ts-ignore
       if (response.data?.rows && Array.isArray(response.data.rows)) {
         // @ts-ignore
@@ -224,15 +225,16 @@ export class StudentsService {
     }
   }
 
-  static async fetchAvailableCourses(): Promise<AssignedCourse[]> {
+  static async fetchAvailableCourses(params?: {
+    search?: string;
+  }): Promise<AssignedCourse[]> {
     try {
       const response = await $crud.get(
-        "retrieve/organization/assigned/courses",
+        `retrieve/organization/assigned/courses?search=${params?.search}`,
       );
       // @ts-ignore
       return response.data?.assignedCourses || [];
     } catch (error) {
-      console.error("Error fetching courses:", error);
       return [];
     }
   }

@@ -10,6 +10,8 @@ import {
 
 import { StudentsService } from "@/services/studentsService";
 import { AssignedCourse } from "@/services/studentsService";
+import { CourseSkeleton } from "../ui/courseSkeleton";
+import { useCallback } from "react";
 
 interface CourseGridProps {
   searchQuery: string;
@@ -17,33 +19,41 @@ interface CourseGridProps {
 
 export function CourseGrid({ searchQuery }: CourseGridProps) {
   const [courses, setCourses] = useState<AssignedCourse[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchCourses = useCallback(async (query: string) => {}, []);
 
   useEffect(() => {
-    StudentsService.fetchAvailableCourses().then((data) => setCourses(data));
-  }, []);
+    setIsLoading(true);
+    const handler = setTimeout(async () => {
+      const data = await StudentsService.fetchAvailableCourses({
+        search: searchQuery,
+      });
+      setCourses(data);
+      setIsLoading(false);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
 
-  const filteredCourses = useMemo(() => {
-    if (!searchQuery.trim()) return courses;
-
-    const query = searchQuery.toLowerCase();
-    return courses.filter((c) => c.course.name.toLowerCase().includes(query));
-  }, [courses, searchQuery]);
+  if (isLoading) {
+    return <CourseSkeleton />;
+  }
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {filteredCourses.length === 0 && courses.length > 0 ? (
+      {courses.length === 0 ? (
         <div className="col-span-full text-center py-8 text-muted-foreground">
           No courses found matching "{searchQuery}"
         </div>
       ) : (
-        filteredCourses.map((c) => (
-          <Card key={c.id} className="overflow-hidden border-foreground/50">
+        courses.map((c, index) => (
+          <Card key={index} className="overflow-hidden border-foreground/50">
             <CardHeader>
               <CardTitle className="line-clamp-2 text-balance">
                 <div className="flex justify-between items-start gap-2">
                   {c.course.name}
                   <span className="text-sm font-medium text-main-bg">
-                    Remaining Tokens :{" "}
+                    Remaining Tokens : {c.remainingToken}
                     <span className="text-white">{c.remainingToken}</span>
                   </span>
                 </div>

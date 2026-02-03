@@ -13,13 +13,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   MoreHorizontal,
   Eye,
   Edit,
@@ -59,7 +52,7 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
       pagination,
       goToPage,
       changeLimit,
-    } = useStudents({ page: 0, limit: 10 });
+    } = useStudents({ page: 0, limit: 10, search: searchQuery });
 
     // Expose refetch method through ref
     useImperativeHandle(
@@ -124,7 +117,7 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
             <h3 className="text-lg font-semibold">
               Students (
               {searchQuery
-                ? `${filteredStudents.length} of ${totalRecords}`
+                ? `${students.length} of ${totalRecords}`
                 : totalRecords}
               )
             </h3>
@@ -143,18 +136,19 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
           <Table>
             <TableHeader className="py-2">
               <TableRow className="text-lg font-bold">
-                <TableHead className="pl-4 w-[35%]">User</TableHead>
-                <TableHead className="w-[15%]">ID</TableHead>
-                <TableHead className="w-[20%]">Phone</TableHead>
-                <TableHead className="w-[20%]">D.O.B</TableHead>
-                <TableHead className="w-[10%]"></TableHead>
+                <TableHead className="w-[5%]">#</TableHead>
+                {/* <TableHead className="w-[10%]">Avatar</TableHead> */}
+                <TableHead className="w-[35%]">Student's Details</TableHead>
+                <TableHead className="w-[20%] pl-5">Phone</TableHead>
+                <TableHead className="w-[16%] pl-3">D.O.B</TableHead>
+                <TableHead className="w-[15%] pl-10">Actions</TableHead>
               </TableRow>
             </TableHeader>
           </Table>
           <div className="max-h-[calc(100vh-420px)] overflow-auto">
             <Table>
               <TableBody>
-                {filteredStudents.length === 0 ? (
+                {students.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={5} className="text-center py-8">
                       <FileWarningIcon />
@@ -166,16 +160,19 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredStudents.map((user) => (
+                  students.map((user) => (
                     <TableRow key={user.id}>
+                      <TableCell className="w-[5%]">{user.id || "—"}</TableCell>
+                      {/* <TableCell>
+                        <Avatar>
+                          <AvatarFallback>
+                            {user.name.slice(0, 2).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                      </TableCell> */}
+
                       <TableCell className="w-[35%]">
                         <div className="flex items-start justify-start w-fit gap-3">
-                          <Avatar>
-                            {/* <AvatarImage src=""></AvatarImage> */}
-                            <AvatarFallback>
-                              {user.name.slice(0, 2).toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
                           <div>
                             <div className="font-medium">{user.name}</div>
                             <div className="text-sm text-muted-foreground">
@@ -184,9 +181,6 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="w-[15%]">
-                        {user.id || "—"}
-                      </TableCell>
                       <TableCell className="w-[20%]">
                         {user.phone || "—"}
                       </TableCell>
@@ -194,26 +188,15 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
                         {user.dob || "—"}
                       </TableCell>
                       <TableCell className="w-[10%]">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                              <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              <Eye className="h-4 w-4 mr-2" />
-                              View Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() => handleEditUser(user)}
-                            >
-                              <Edit className="h-4 w-4 mr-2" />
-                              Edit User
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                        <Button
+                          variant="ghost"
+                          className="flex flex-row items-center cursor-pointer"
+                          size="icon-sm"
+                          onClick={() => handleEditUser(user)}
+                        >
+                          <Edit className="h-4 w-4" />
+                          Edit Student
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))

@@ -51,11 +51,7 @@ export default function UsersPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            className="cursor-pointer hover:bg-foreground/90"
-            onClick={handleOpenBulkUpload}
-          >
+          <Button variant="outline" onClick={handleOpenBulkUpload}>
             <Upload className="h-4 w-4" />
             Bulk Upload
           </Button>

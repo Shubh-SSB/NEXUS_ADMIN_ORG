@@ -45,7 +45,7 @@ export const PaginationControls = ({
           value={limit.toString()}
           onValueChange={(value) => onLimitChange(Number(value))}
         >
-          <SelectTrigger className="h-8 w-[70px]">
+          <SelectTrigger className="h-8 w-18">
             <SelectValue placeholder={limit.toString()} />
           </SelectTrigger>
           <SelectContent side="top">

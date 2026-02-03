@@ -1,8 +1,7 @@
 "use client";
 
-import { Bell, Search, Moon, Sun, ChevronDown } from "lucide-react";
+import { Bell, Moon, Sun, ChevronDown, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useTheme } from "@/components/theme-provider";
 import {
   DropdownMenu,
@@ -17,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { LogoutButton, useAuth } from "@/components/auth";
 import { S3_URL } from "@/lib/api-data-store";
+import { Input } from "./ui/input";
 
 export function AdminHeader() {
   const { theme, toggleTheme } = useTheme();
@@ -43,6 +43,7 @@ export function AdminHeader() {
           size="icon"
           onClick={toggleTheme}
           aria-label="Toggle theme"
+          className="border cursor-pointer hover:border-main-bg/45"
         >
           {theme === "light" ? (
             <Moon className="h-5 w-5" />
@@ -125,17 +126,26 @@ export function AdminHeader() {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/profile" className="flex w-full items-center">
+              <Link
+                href="/profile"
+                className="flex w-full cursor-pointer items-center"
+              >
                 Profile
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/dashboard" className="flex w-full items-center">
+              <Link
+                href="/dashboard"
+                className="flex w-full cursor-pointer items-center"
+              >
                 Dashboard
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/users" className="flex w-full items-center">
+              <Link
+                href="/users"
+                className="flex w-full cursor-pointer items-center"
+              >
                 Users
               </Link>
             </DropdownMenuItem>

@@ -19,43 +19,55 @@ export const useStudents = (initialParams?: PaginationParams) => {
       hasPrevPage: false,
     },
   );
-  const [pagination, setPagination] = useState<PaginationParams>(
-    initialParams || { page: 0, limit: 10 },
-  );
+  const [pagination, setPagination] = useState<PaginationParams>({
+    page: initialParams?.page ?? 0,
+    limit: initialParams?.limit ?? 10,
+  });
+  const [search, setSearch] = useState(initialParams?.search ?? "");
 
-  const fetchStudents = async (params?: PaginationParams) => {
-    try {
-      setIsLoading(true);
-      setError(null);
+  useEffect(() => {
+    setIsLoading(true);
+    const handler = setTimeout(async () => {
+      try {
+        const data = await StudentsService.fetchStudentsWithMeta({
+          ...pagination,
+          search,
+        });
+        setPaginatedData(data);
+        setError(null);
+      } catch (err: any) {
+        console.error("Error fetching students:", err);
+        setError(err.message || "Failed to fetch students data");
+        setPaginatedData({
+          students: [],
+          totalRecords: 0,
+          currentPage: 0,
+          totalPages: 0,
+          hasNextPage: false,
+          hasPrevPage: false,
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [pagination, search]);
 
-      const currentParams = params || pagination;
-      const data = await StudentsService.fetchStudentsWithMeta(currentParams);
-      setPaginatedData(data);
-      setPagination(currentParams);
-    } catch (err: any) {
-      console.error("Error fetching students:", err);
-      setError(err.message || "Failed to fetch students data");
-      setPaginatedData({
-        students: [],
-        totalRecords: 0,
-        currentPage: 0,
-        totalPages: 0,
-        hasNextPage: false,
-        hasPrevPage: false,
-      });
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    if (initialParams?.search !== undefined) {
+      setSearch(initialParams.search);
+      setPaginatedData((prev) => ({ ...prev, page: 0 }));
     }
-  };
+  }, [initialParams?.search]);
 
   const goToPage = (page: number) => {
     if (page >= 0 && page <= paginatedData.totalPages - 1) {
-      fetchStudents({ ...pagination, page });
+      setPagination({ ...pagination, page });
     }
   };
 
   const changeLimit = (limit: number) => {
-    fetchStudents({ page: 0, limit });
+    setPagination({ page: 0, limit });
   };
 
   const nextPage = () => {
@@ -71,12 +83,15 @@ export const useStudents = (initialParams?: PaginationParams) => {
   };
 
   const refetch = () => {
-    fetchStudents(pagination);
+    setPagination({ ...pagination });
+    StudentsService.fetchStudentsWithMeta({
+      ...pagination,
+      search,
+    })
+      .then((data) => setPaginatedData(data))
+      .catch((err) => setError(err.message || "Failed to fetch students data"))
+      .finally(() => setIsLoading(false));
   };
-
-  useEffect(() => {
-    fetchStudents();
-  }, []);
 
   return {
     // Data

@@ -22,7 +22,7 @@ export function UserFilters({ onSearchChange }: FiltersProps) {
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Search students by name or email..."
-          className="pl-9"
+          className="pl-9 cursor-text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
