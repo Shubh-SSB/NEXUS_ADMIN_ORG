@@ -9,6 +9,7 @@ interface AuthGuardProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
   redirectTo?: string;
+  redirectAuthenticatedTo?: string;
   showNotification?: boolean;
   notificationMessage?: string;
 }
@@ -16,7 +17,8 @@ interface AuthGuardProps {
 export const AuthGuard: React.FC<AuthGuardProps> = ({
   children,
   fallback = null,
-  redirectTo = "/login",
+  redirectTo = "/",
+  redirectAuthenticatedTo = "/dashboard",
   showNotification = true,
   notificationMessage = "Unauthorized! Please login first.",
 }) => {
@@ -28,13 +30,17 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
 
   useEffect(() => {
     const performAuthCheck = () => {
-      // Skip auth check for login page
+      const authenticated = checkAuth();
+
+      // Prevent authenticated users from visiting login page
       if (pathname === redirectTo) {
+        if (authenticated) {
+          router.replace(redirectAuthenticatedTo);
+          return;
+        }
         setIsChecking(false);
         return;
       }
-
-      const authenticated = checkAuth();
 
       if (!authenticated) {
         // Show error notification for unauthorized access
@@ -59,6 +65,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
   }, [
     pathname,
     redirectTo,
+    redirectAuthenticatedTo,
     showNotification,
     notificationMessage,
     router,
@@ -90,7 +97,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
  */
 export function withAuthGuard<P extends object>(
   Component: React.ComponentType<P>,
-  options?: Omit<AuthGuardProps, "children">
+  options?: Omit<AuthGuardProps, "children">,
 ) {
   return function AuthGuardedComponent(props: P) {
     return (
