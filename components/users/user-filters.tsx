@@ -11,7 +11,7 @@ export function UserFilters({ onSearchChange }: FiltersProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onSearchChange(inputValue);
-    }, 300);
+    }, 800);
 
     return () => clearTimeout(timer);
   }, [inputValue, onSearchChange]);

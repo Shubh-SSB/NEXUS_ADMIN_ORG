@@ -74,13 +74,13 @@ module.exports = mod;
 "[project]/factory/crudFactory.ts [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-/** @format */ __turbopack_context__.s([
+__turbopack_context__.s([
     "$crud",
     ()=>$crud,
     "CrudFactory",
     ()=>CrudFactory
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
+/** @format */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/notistack/notistack.esm.js [app-ssr] (ecmascript)");
 ;
 ;
@@ -329,8 +329,11 @@ class StudentsService {
     static async createStudent(studentData) {
         try {
             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$factory$2f$crudFactory$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["$crud"].post("create/organization/student", studentData);
-            if (response.data) {
-                return this.transformStudent(response.data);
+            if (response?.type === "success") {
+                if (response.data) {
+                    return this.transformStudent(response.data);
+                }
+                return this.transformStudent(studentData);
             }
             throw new Error("Failed to create student");
         } catch (error) {

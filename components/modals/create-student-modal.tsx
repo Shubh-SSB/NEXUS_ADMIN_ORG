@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useFormik } from "formik";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,7 +62,7 @@ export function CreateStudentModal({
     },
     validationSchema: validationSchema("createStudent"),
     onSubmit: async (values) => {
-      let isSuccess = false;
+      // let isSuccess = false;
       setIsLoading(true);
 
       const cleanData: CreateStudentData = {
@@ -76,29 +76,22 @@ export function CreateStudentModal({
 
       try {
         await StudentsService.createStudent(cleanData);
-        // Success
-        isSuccess = true;
+        handleClose();
+        // isSuccess = true;
       } catch (error) {
-        // Let CRUD factory handle notifications
-        console.error("Student creation failed:", error);
       } finally {
-        setIsLoading(false);
-        if (isSuccess) {
-          onStudentCreated?.();
-          onClose();
-          formik.resetForm();
-          setSelectValue("");
-        }
       }
     },
   });
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     if (!isLoading) {
+      setIsLoading(false);
       formik.resetForm();
+      setSelectValue("");
       onClose();
     }
-  };
+  }, [isLoading, onClose]);
 
   const handleCourseToggle = (courseId: number) => {
     const selected = formik.values.enrollCourses || [];

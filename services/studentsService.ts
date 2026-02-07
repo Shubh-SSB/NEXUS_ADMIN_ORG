@@ -161,8 +161,11 @@ export class StudentsService {
         studentData,
       );
 
-      if (response.data) {
-        return this.transformStudent(response.data);
+      if (response?.type === "success") {
+        if (response.data) {
+          return this.transformStudent(response.data);
+        }
+        return this.transformStudent(studentData);
       }
       throw new Error("Failed to create student");
     } catch (error) {
