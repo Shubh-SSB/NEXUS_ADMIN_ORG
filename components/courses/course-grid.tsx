@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardDescription,
@@ -11,28 +11,33 @@ import {
 import { StudentsService } from "@/services/studentsService";
 import { AssignedCourse } from "@/services/studentsService";
 import { CourseSkeleton } from "../ui/courseSkeleton";
-import { useCallback } from "react";
 
 interface CourseGridProps {
-  searchQuery: string;
+  searchQuery?: string;
 }
 
-export function CourseGrid({ searchQuery }: CourseGridProps) {
+export function CourseGrid({ searchQuery = "" }: CourseGridProps) {
   const [courses, setCourses] = useState<AssignedCourse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchCourses = useCallback(async (query: string) => {}, []);
-
   useEffect(() => {
-    setIsLoading(true);
-    const handler = setTimeout(async () => {
+    let isActive = true;
+    const run = async () => {
+      setIsLoading(true);
       const data = await StudentsService.fetchAvailableCourses({
         search: searchQuery,
       });
-      setCourses(data);
-      setIsLoading(false);
-    }, 300);
-    return () => clearTimeout(handler);
+      if (isActive) {
+        setCourses(data);
+        setIsLoading(false);
+      }
+    };
+
+    run();
+
+    return () => {
+      isActive = false;
+    };
   }, [searchQuery]);
 
   if (isLoading) {
@@ -43,7 +48,9 @@ export function CourseGrid({ searchQuery }: CourseGridProps) {
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {courses.length === 0 ? (
         <div className="col-span-full text-center py-8 text-muted-foreground">
-          No courses found matching "{searchQuery}"
+          {searchQuery.trim()
+            ? `No courses found matching "${searchQuery}"`
+            : "No courses available"}
         </div>
       ) : (
         courses.map((c, index) => (
@@ -54,7 +61,6 @@ export function CourseGrid({ searchQuery }: CourseGridProps) {
                   {c.course.name}
                   <span className="text-sm font-medium text-main-bg">
                     Remaining Tokens : {c.remainingToken}
-                    <span className="text-white">{c.remainingToken}</span>
                   </span>
                 </div>
               </CardTitle>

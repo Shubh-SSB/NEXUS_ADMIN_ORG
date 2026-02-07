@@ -229,11 +229,16 @@ export class StudentsService {
     search?: string;
   }): Promise<AssignedCourse[]> {
     try {
-      const response = await $crud.get(
-        `retrieve/organization/assigned/courses?search=${params?.search}`,
-      );
-      // @ts-ignore
-      return response.data?.assignedCourses || [];
+      const search = params?.search?.trim();
+      const url = search
+        ? `retrieve/organization/assigned/courses?search=${encodeURIComponent(
+            search,
+          )}`
+        : "retrieve/organization/assigned/courses";
+      const response = await $crud.get(url);
+
+      const data = response.data as { rows?: AssignedCourse[] } | undefined;
+      return data?.rows || [];
     } catch (error) {
       return [];
     }

@@ -75,11 +75,10 @@ export function CreateStudentModal({
       try {
         await StudentsService.createStudent(cleanData);
 
-        // Success - close modal and reset
+        // Success - notify, close modal, and reset
+        onStudentCreated?.();
         onClose();
         formik.resetForm();
-
-        setTimeout(() => onStudentCreated?.(), 100);
       } catch (error) {
         // Let CRUD factory handle notifications
         console.error("Student creation failed:", error);

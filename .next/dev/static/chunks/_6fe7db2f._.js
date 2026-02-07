@@ -309,9 +309,11 @@ class StudentsService {
     }
     static async fetchAvailableCourses(params) {
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$factory$2f$crudFactory$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["$crud"].get(`retrieve/organization/assigned/courses?search=${params?.search}`);
-            // @ts-ignore
-            return response.data?.assignedCourses || [];
+            const search = params?.search?.trim();
+            const url = search ? `retrieve/organization/assigned/courses?search=${encodeURIComponent(search)}` : "retrieve/organization/assigned/courses";
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$factory$2f$crudFactory$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["$crud"].get(url);
+            const data = response.data;
+            return data?.rows || [];
         } catch (error) {
             return [];
         }
@@ -485,28 +487,30 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-;
-function CourseGrid({ searchQuery }) {
+function CourseGrid({ searchQuery = "" }) {
     _s();
     const [courses, setCourses] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const fetchCourses = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "CourseGrid.useCallback[fetchCourses]": async (query)=>{}
-    }["CourseGrid.useCallback[fetchCourses]"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CourseGrid.useEffect": ()=>{
-            setIsLoading(true);
-            const handler = setTimeout({
-                "CourseGrid.useEffect.handler": async ()=>{
+            let isActive = true;
+            const run = {
+                "CourseGrid.useEffect.run": async ()=>{
+                    setIsLoading(true);
                     const data = await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$studentsService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["StudentsService"].fetchAvailableCourses({
                         search: searchQuery
                     });
-                    setCourses(data);
-                    setIsLoading(false);
+                    if (isActive) {
+                        setCourses(data);
+                        setIsLoading(false);
+                    }
                 }
-            }["CourseGrid.useEffect.handler"], 300);
+            }["CourseGrid.useEffect.run"];
+            run();
             return ({
-                "CourseGrid.useEffect": ()=>clearTimeout(handler)
+                "CourseGrid.useEffect": ()=>{
+                    isActive = false;
+                }
             })["CourseGrid.useEffect"];
         }
     }["CourseGrid.useEffect"], [
@@ -515,7 +519,7 @@ function CourseGrid({ searchQuery }) {
     if (isLoading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$courseSkeleton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CourseSkeleton"], {}, void 0, false, {
             fileName: "[project]/components/courses/course-grid.tsx",
-            lineNumber: 39,
+            lineNumber: 44,
             columnNumber: 12
         }, this);
     }
@@ -523,14 +527,10 @@ function CourseGrid({ searchQuery }) {
         className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3",
         children: courses.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "col-span-full text-center py-8 text-muted-foreground",
-            children: [
-                'No courses found matching "',
-                searchQuery,
-                '"'
-            ]
-        }, void 0, true, {
+            children: searchQuery.trim() ? `No courses found matching "${searchQuery}"` : "No courses available"
+        }, void 0, false, {
             fileName: "[project]/components/courses/course-grid.tsx",
-            lineNumber: 45,
+            lineNumber: 50,
             columnNumber: 9
         }, this) : courses.map((c, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
                 className: "overflow-hidden border-foreground/50",
@@ -546,30 +546,22 @@ function CourseGrid({ searchQuery }) {
                                         className: "text-sm font-medium text-main-bg",
                                         children: [
                                             "Remaining Tokens : ",
-                                            c.remainingToken,
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-white",
-                                                children: c.remainingToken
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/courses/course-grid.tsx",
-                                                lineNumber: 57,
-                                                columnNumber: 21
-                                            }, this)
+                                            c.remainingToken
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/courses/course-grid.tsx",
-                                        lineNumber: 55,
+                                        lineNumber: 62,
                                         columnNumber: 19
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/courses/course-grid.tsx",
-                                lineNumber: 53,
+                                lineNumber: 60,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/courses/course-grid.tsx",
-                            lineNumber: 52,
+                            lineNumber: 59,
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -577,27 +569,27 @@ function CourseGrid({ searchQuery }) {
                             children: c.course.description
                         }, void 0, false, {
                             fileName: "[project]/components/courses/course-grid.tsx",
-                            lineNumber: 61,
+                            lineNumber: 67,
                             columnNumber: 15
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/courses/course-grid.tsx",
-                    lineNumber: 51,
+                    lineNumber: 58,
                     columnNumber: 13
                 }, this)
             }, index, false, {
                 fileName: "[project]/components/courses/course-grid.tsx",
-                lineNumber: 50,
+                lineNumber: 57,
                 columnNumber: 11
             }, this))
     }, void 0, false, {
         fileName: "[project]/components/courses/course-grid.tsx",
-        lineNumber: 43,
+        lineNumber: 48,
         columnNumber: 5
     }, this);
 }
-_s(CourseGrid, "4pTGuTmfmFchgKxMClQpaM8qrBA=");
+_s(CourseGrid, "y2y6Rd4s3v31po6IpfAy7MBA3WE=");
 _c = CourseGrid;
 var _c;
 __turbopack_context__.k.register(_c, "CourseGrid");
