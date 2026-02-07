@@ -60,7 +60,7 @@ export default function UsersPage() {
             onClick={handleOpenModal}
           >
             <UserPlus className="h-4 w-4" />
-            Create User
+            Create Student
           </Button>
         </div>
       </div>

@@ -42,6 +42,7 @@ export function CreateStudentModal({
 }: CreateStudentModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState<AssignedCourse[]>([]);
+  const [selectValue, setSelectValue] = useState("");
 
   // Fetch courses when modal opens
   useEffect(() => {
@@ -61,6 +62,7 @@ export function CreateStudentModal({
     },
     validationSchema: validationSchema("createStudent"),
     onSubmit: async (values) => {
+      let isSuccess = false;
       setIsLoading(true);
 
       const cleanData: CreateStudentData = {
@@ -74,16 +76,19 @@ export function CreateStudentModal({
 
       try {
         await StudentsService.createStudent(cleanData);
-
-        // Success - notify, close modal, and reset
-        onStudentCreated?.();
-        onClose();
-        formik.resetForm();
+        // Success
+        isSuccess = true;
       } catch (error) {
         // Let CRUD factory handle notifications
         console.error("Student creation failed:", error);
       } finally {
         setIsLoading(false);
+        if (isSuccess) {
+          onStudentCreated?.();
+          onClose();
+          formik.resetForm();
+          setSelectValue("");
+        }
       }
     },
   });
@@ -231,7 +236,11 @@ export function CreateStudentModal({
             <Label>Assigned Courses</Label>
             <Select
               disabled={isLoading}
-              onValueChange={(courseId) => handleCourseToggle(Number(courseId))}
+              value={selectValue}
+              onValueChange={(courseId) => {
+                handleCourseToggle(Number(courseId));
+                setSelectValue("");
+              }}
             >
               <SelectTrigger>
                 <SelectValue
