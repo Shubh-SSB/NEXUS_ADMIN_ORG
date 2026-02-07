@@ -655,7 +655,7 @@ function CourseFilters({ onSearchChange }) {
                 "CourseFilters.useEffect.timer": ()=>{
                     onSearchChange(inputValue);
                 }
-            }["CourseFilters.useEffect.timer"], 300);
+            }["CourseFilters.useEffect.timer"], 800);
             return ({
                 "CourseFilters.useEffect": ()=>clearTimeout(timer)
             })["CourseFilters.useEffect"];
