@@ -148,8 +148,15 @@ export function AdminHeader() {
               >
                 Users
               </Link>
+            </DropdownMenuItem>{" "}
+            <DropdownMenuItem asChild>
+              <Link
+                href="/courses"
+                className="flex w-full cursor-pointer items-center"
+              >
+                Courses
+              </Link>
             </DropdownMenuItem>
-
             {/* <DropdownMenuItem>Team</DropdownMenuItem> */}
             {/* <DropdownMenuItem>Preferences</DropdownMenuItem> */}
             <DropdownMenuSeparator />
