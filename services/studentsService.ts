@@ -29,7 +29,7 @@ export interface CreateStudentData {
   phone: string;
   dob: string;
   enrollCourses: number[];
-  password: string;
+  password?: string;
 }
 
 export interface UpdateStudentData {

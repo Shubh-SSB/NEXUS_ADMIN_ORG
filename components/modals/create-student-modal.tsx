@@ -57,7 +57,6 @@ export function CreateStudentModal({
       email: "",
       phone: "",
       dob: "",
-      password: "",
       enrollCourses: [],
     },
     validationSchema: validationSchema("createStudent"),
@@ -68,7 +67,6 @@ export function CreateStudentModal({
       const cleanData: CreateStudentData = {
         name: values.name.trim(),
         email: values.email.trim(),
-        password: values.password.trim(),
         phone: values.phone?.trim() || "",
         dob: values.dob,
         enrollCourses: values.enrollCourses || [],
@@ -163,29 +161,6 @@ export function CreateStudentModal({
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-sm text-red-500">{formik.errors.email}</p>
-            )}
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">
-              Password <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder="Enter password"
-              className={
-                formik.touched.password && formik.errors.password
-                  ? "border-red-500"
-                  : ""
-              }
-              disabled={isLoading}
-            />
-            {formik.touched.password && formik.errors.password && (
-              <p className="text-sm text-red-500">{formik.errors.password}</p>
             )}
           </div>
           <div className="space-y-2">

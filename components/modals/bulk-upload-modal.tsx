@@ -446,7 +446,7 @@ export function BulkUploadModal({
                 htmlFor={String(course.course.id)}
                 className="text-sm cursor-pointer flex-1"
               >
-                {course.course.name} ({course.course.id})
+                {course.course.name} ({course.remainingToken} Tokens)
               </Label>
             </div>
           ))}

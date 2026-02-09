@@ -151,7 +151,6 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
                 {students.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={5} className="text-center py-8">
-                      <FileWarningIcon />
                       <div className="text-muted-foreground">
                         {searchQuery
                           ? `No students found matching "${searchQuery}"`
@@ -195,7 +194,6 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
                           onClick={() => handleEditUser(user)}
                         >
                           <Edit className="h-4 w-4" />
-                          Edit Student
                         </Button>
                       </TableCell>
                     </TableRow>
