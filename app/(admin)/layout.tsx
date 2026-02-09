@@ -14,6 +14,7 @@ export default function AdminLayout({
 }) {
   return (
     <AuthGuard
+      redirectTo="/login"
       fallback={
         <div className="flex items-center justify-center min-h-screen">
           <div className="animate-pulse">Checking authentication...</div>

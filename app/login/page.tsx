@@ -31,11 +31,13 @@ export default function LoginPage() {
       //   @ts-ignore
       apiDataStore.setLoginResponse(response.data);
 
-      // Extract data from correct API structure: response.data.data.token and response.data.data.user
+      // Extract token/user from API response (supports multiple response shapes)
       //   @ts-ignore
-      const token = response?.data?.token;
+      const responseData = response?.data ?? response?.data?.data ?? response;
       //   @ts-ignore
-      const user = response?.data?.user;
+      const token = responseData?.token ?? response?.token;
+      //   @ts-ignore
+      const user = responseData?.user ?? response?.user;
 
       if (token && user) {
         login(token, user);

@@ -247,7 +247,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$auth$2f$auth$2
 ;
 ;
 ;
-const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotification = true, notificationMessage = "Unauthorized! Please login first." })=>{
+const AuthGuard = ({ children, fallback = null, redirectTo = "/", redirectAuthenticatedTo = "/dashboard", showNotification = true, notificationMessage = "Unauthorized! Please login first." })=>{
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const { enqueueSnackbar } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$notistack$2f$notistack$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSnackbar"])();
@@ -255,12 +255,16 @@ const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotif
     const [isChecking, setIsChecking] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const performAuthCheck = ()=>{
-            // Skip auth check for login page
+            const authenticated = checkAuth();
+            // Prevent authenticated users from visiting login page
             if (pathname === redirectTo) {
+                if (authenticated) {
+                    router.replace(redirectAuthenticatedTo);
+                    return;
+                }
                 setIsChecking(false);
                 return;
             }
-            const authenticated = checkAuth();
             if (!authenticated) {
                 // Show error notification for unauthorized access
                 if (showNotification) {
@@ -284,6 +288,7 @@ const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotif
     }, [
         pathname,
         redirectTo,
+        redirectAuthenticatedTo,
         showNotification,
         notificationMessage,
         router,
@@ -317,12 +322,12 @@ function withAuthGuard(Component, options) {
                 ...props
             }, void 0, false, {
                 fileName: "[project]/components/auth/auth-guard.tsx",
-                lineNumber: 98,
+                lineNumber: 105,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/auth/auth-guard.tsx",
-            lineNumber: 97,
+            lineNumber: 104,
             columnNumber: 7
         }, this);
     };

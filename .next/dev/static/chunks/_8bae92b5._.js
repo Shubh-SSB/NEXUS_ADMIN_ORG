@@ -267,7 +267,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotification = true, notificationMessage = "Unauthorized! Please login first." })=>{
+const AuthGuard = ({ children, fallback = null, redirectTo = "/", redirectAuthenticatedTo = "/dashboard", showNotification = true, notificationMessage = "Unauthorized! Please login first." })=>{
     _s();
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
@@ -278,12 +278,16 @@ const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotif
         "AuthGuard.useEffect": ()=>{
             const performAuthCheck = {
                 "AuthGuard.useEffect.performAuthCheck": ()=>{
-                    // Skip auth check for login page
+                    const authenticated = checkAuth();
+                    // Prevent authenticated users from visiting login page
                     if (pathname === redirectTo) {
+                        if (authenticated) {
+                            router.replace(redirectAuthenticatedTo);
+                            return;
+                        }
                         setIsChecking(false);
                         return;
                     }
-                    const authenticated = checkAuth();
                     if (!authenticated) {
                         // Show error notification for unauthorized access
                         if (showNotification) {
@@ -309,6 +313,7 @@ const AuthGuard = ({ children, fallback = null, redirectTo = "/login", showNotif
     }["AuthGuard.useEffect"], [
         pathname,
         redirectTo,
+        redirectAuthenticatedTo,
         showNotification,
         notificationMessage,
         router,
@@ -351,12 +356,12 @@ function withAuthGuard(Component, options) {
                 ...props
             }, void 0, false, {
                 fileName: "[project]/components/auth/auth-guard.tsx",
-                lineNumber: 98,
+                lineNumber: 105,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/auth/auth-guard.tsx",
-            lineNumber: 97,
+            lineNumber: 104,
             columnNumber: 7
         }, this);
     };
