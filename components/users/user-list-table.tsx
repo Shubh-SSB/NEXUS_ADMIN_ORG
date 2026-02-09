@@ -13,6 +13,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   MoreHorizontal,
   Eye,
   Edit,
@@ -187,14 +192,20 @@ export const UserListTable = forwardRef<UserListTableRef, UserListTableProps>(
                         {user.dob || "—"}
                       </TableCell>
                       <TableCell className="w-[10%]">
-                        <Button
-                          variant="ghost"
-                          className="flex flex-row items-center cursor-pointer"
-                          size="icon-sm"
-                          onClick={() => handleEditUser(user)}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              className="flex flex-row items-center cursor-pointer"
+                              size="icon-sm"
+                              onClick={() => handleEditUser(user)}
+                              aria-label="Edit student"
+                            >
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top">Edit</TooltipContent>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
                   ))
