@@ -2453,7 +2453,6 @@ const courseAssignValidations = {
 const createStudentValidations = {
     name: SCHEMA.name,
     email: SCHEMA.email,
-    password: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yup$2f$index$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["string"]().required("Password is required"),
     phone: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yup$2f$index$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["string"]().required("Phone is required").matches(phoneRegExp, "Phone number must be exactly 10 digits"),
     dob: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yup$2f$index$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["string"]().nullable(),
     enrollCourses: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yup$2f$index$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["array"]().of(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yup$2f$index$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["number"]())
@@ -2858,14 +2857,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/card.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/table.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/tooltip.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$pen$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Edit$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/square-pen.js [app-ssr] (ecmascript) <export default as Edit>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$refresh$2d$cw$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__RefreshCw$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/refresh-cw.js [app-ssr] (ecmascript) <export default as RefreshCw>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$warning$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__FileWarningIcon$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/file-warning.js [app-ssr] (ecmascript) <export default as FileWarningIcon>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useStudents$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/hooks/useStudents.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$user$2d$table$2d$skeleton$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/user-table-skeleton.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$pagination$2d$controls$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/pagination-controls.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$modals$2f$update$2d$student$2d$modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/modals/update-student-modal.tsx [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -2912,7 +2912,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
     if (isLoading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$user$2d$table$2d$skeleton$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["UserTableSkeleton"], {}, void 0, false, {
             fileName: "[project]/components/users/user-list-table.tsx",
-            lineNumber: 92,
+            lineNumber: 97,
             columnNumber: 14
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -2928,7 +2928,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                             children: "Error loading students"
                         }, void 0, false, {
                             fileName: "[project]/components/users/user-list-table.tsx",
-                            lineNumber: 100,
+                            lineNumber: 105,
                             columnNumber: 15
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2936,7 +2936,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                             children: error
                         }, void 0, false, {
                             fileName: "[project]/components/users/user-list-table.tsx",
-                            lineNumber: 103,
+                            lineNumber: 108,
                             columnNumber: 15
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2945,23 +2945,23 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                             children: "Try Again"
                         }, void 0, false, {
                             fileName: "[project]/components/users/user-list-table.tsx",
-                            lineNumber: 104,
+                            lineNumber: 109,
                             columnNumber: 15
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/users/user-list-table.tsx",
-                    lineNumber: 99,
+                    lineNumber: 104,
                     columnNumber: 13
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/components/users/user-list-table.tsx",
-                lineNumber: 98,
+                lineNumber: 103,
                 columnNumber: 11
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/components/users/user-list-table.tsx",
-            lineNumber: 97,
+            lineNumber: 102,
             columnNumber: 9
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -2982,7 +2982,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                lineNumber: 117,
+                                lineNumber: 122,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2995,20 +2995,20 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                         className: `h-4 w-4 mr-2 ${isLoading ? "animate-spin" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 130,
+                                        lineNumber: 135,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     "Refresh"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                lineNumber: 124,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/users/user-list-table.tsx",
-                        lineNumber: 116,
+                        lineNumber: 121,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Table"], {
@@ -3022,7 +3022,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                         children: "#"
                                     }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 139,
+                                        lineNumber: 144,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -3030,7 +3030,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                         children: "Student Records"
                                     }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 141,
+                                        lineNumber: 146,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -3038,7 +3038,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                         children: "Phone"
                                     }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 147,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -3046,7 +3046,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                         children: "D.O.B"
                                     }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 148,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -3054,23 +3054,23 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                         children: "Actions"
                                     }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 144,
+                                        lineNumber: 149,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                lineNumber: 138,
+                                lineNumber: 143,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/components/users/user-list-table.tsx",
-                            lineNumber: 137,
+                            lineNumber: 142,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/components/users/user-list-table.tsx",
-                        lineNumber: 136,
+                        lineNumber: 141,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3081,29 +3081,22 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableCell"], {
                                         colSpan: 5,
                                         className: "text-center py-8",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$warning$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__FileWarningIcon$3e$__["FileWarningIcon"], {}, void 0, false, {
-                                                fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 154,
-                                                columnNumber: 23
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-muted-foreground",
-                                                children: searchQuery ? `No students found matching "${searchQuery}"` : "No students found"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 155,
-                                                columnNumber: 23
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "text-muted-foreground",
+                                            children: searchQuery ? `No students found matching "${searchQuery}"` : "No students found"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/users/user-list-table.tsx",
+                                            lineNumber: 159,
+                                            columnNumber: 23
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 153,
+                                        lineNumber: 158,
                                         columnNumber: 21
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/components/users/user-list-table.tsx",
-                                    lineNumber: 152,
+                                    lineNumber: 157,
                                     columnNumber: 19
                                 }, ("TURBOPACK compile-time value", void 0)) : students.map((user)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableRow"], {
                                         children: [
@@ -3112,7 +3105,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                                 children: user.id || "—"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 165,
+                                                lineNumber: 169,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -3126,7 +3119,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                                                 children: user.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                                lineNumber: 177,
+                                                                lineNumber: 181,
                                                                 columnNumber: 29
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3134,23 +3127,23 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                                                 children: user.email
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                                lineNumber: 178,
+                                                                lineNumber: 182,
                                                                 columnNumber: 29
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                                        lineNumber: 176,
+                                                        lineNumber: 180,
                                                         columnNumber: 27
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/users/user-list-table.tsx",
-                                                    lineNumber: 175,
+                                                    lineNumber: 179,
                                                     columnNumber: 25
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 174,
+                                                lineNumber: 178,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -3158,7 +3151,7 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                                 children: user.phone || "—"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 184,
+                                                lineNumber: 188,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -3166,55 +3159,76 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                                                 children: user.dob || "—"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 187,
+                                                lineNumber: 191,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableCell"], {
                                                 className: "w-[10%]",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                                                    variant: "ghost",
-                                                    className: "flex flex-row items-center cursor-pointer",
-                                                    size: "icon-sm",
-                                                    onClick: ()=>handleEditUser(user),
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Tooltip"], {
                                                     children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$pen$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Edit$3e$__["Edit"], {
-                                                            className: "h-4 w-4"
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TooltipTrigger"], {
+                                                            asChild: true,
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                                                variant: "ghost",
+                                                                className: "flex flex-row items-center cursor-pointer",
+                                                                size: "icon-sm",
+                                                                onClick: ()=>handleEditUser(user),
+                                                                "aria-label": "Edit student",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$pen$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Edit$3e$__["Edit"], {
+                                                                    className: "h-4 w-4"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/users/user-list-table.tsx",
+                                                                    lineNumber: 204,
+                                                                    columnNumber: 31
+                                                                }, ("TURBOPACK compile-time value", void 0))
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/users/user-list-table.tsx",
+                                                                lineNumber: 197,
+                                                                columnNumber: 29
+                                                            }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/users/user-list-table.tsx",
-                                                            lineNumber: 197,
+                                                            lineNumber: 196,
                                                             columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        "Edit Student"
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TooltipContent"], {
+                                                            side: "top",
+                                                            children: "Edit"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/users/user-list-table.tsx",
+                                                            lineNumber: 207,
+                                                            columnNumber: 27
+                                                        }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/users/user-list-table.tsx",
-                                                    lineNumber: 191,
+                                                    lineNumber: 195,
                                                     columnNumber: 25
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                                lineNumber: 190,
+                                                lineNumber: 194,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, user.id, true, {
                                         fileName: "[project]/components/users/user-list-table.tsx",
-                                        lineNumber: 164,
+                                        lineNumber: 168,
                                         columnNumber: 21
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/components/users/user-list-table.tsx",
-                                lineNumber: 150,
+                                lineNumber: 155,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/components/users/user-list-table.tsx",
-                            lineNumber: 149,
+                            lineNumber: 154,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/components/users/user-list-table.tsx",
-                        lineNumber: 148,
+                        lineNumber: 153,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     totalRecords > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$pagination$2d$controls$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PaginationControls"], {
@@ -3228,13 +3242,13 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                         onLimitChange: changeLimit
                     }, void 0, false, {
                         fileName: "[project]/components/users/user-list-table.tsx",
-                        lineNumber: 210,
+                        lineNumber: 219,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/users/user-list-table.tsx",
-                lineNumber: 115,
+                lineNumber: 120,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$modals$2f$update$2d$student$2d$modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["UpdateStudentModal"], {
@@ -3244,13 +3258,13 @@ const UserListTable = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proje
                 student: selectedStudent
             }, void 0, false, {
                 fileName: "[project]/components/users/user-list-table.tsx",
-                lineNumber: 224,
+                lineNumber: 233,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/components/users/user-list-table.tsx",
-        lineNumber: 114,
+        lineNumber: 119,
         columnNumber: 7
     }, ("TURBOPACK compile-time value", void 0));
 });
@@ -3368,31 +3382,35 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
             email: "",
             phone: "",
             dob: "",
-            password: "",
             enrollCourses: []
         },
         validationSchema: (0, __TURBOPACK__imported__module__$5b$project$5d2f$schema$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("createStudent"),
         onSubmit: async (values)=>{
-            // let isSuccess = false;
+            console.log("Form submitted with values:", values);
             setIsLoading(true);
             const cleanData = {
                 name: values.name.trim(),
                 email: values.email.trim(),
-                password: values.password.trim(),
                 phone: values.phone?.trim() || "",
                 dob: values.dob,
                 enrollCourses: values.enrollCourses || []
             };
             try {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$studentsService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["StudentsService"].createStudent(cleanData);
+                const result = await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$studentsService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["StudentsService"].createStudent(cleanData);
+                console.log("API call successful:", result);
+                // Call the success callback if provided
+                onStudentCreated?.();
                 handleClose();
-            // isSuccess = true;
-            } catch (error) {} finally{}
+            } catch (error) {
+                console.error("Error creating student:", error);
+            // You might want to show an error message to the user here
+            } finally{
+                setIsLoading(false);
+            }
         }
     });
     const handleClose = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
         if (!isLoading) {
-            setIsLoading(false);
             formik.resetForm();
             setSelectValue("");
             onClose();
@@ -3426,20 +3444,20 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                             children: "Create New Student"
                         }, void 0, false, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 115,
+                            lineNumber: 117,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
                             children: "Add a new student to your organization. Fill in the required information below."
                         }, void 0, false, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 116,
+                            lineNumber: 118,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                    lineNumber: 114,
+                    lineNumber: 116,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -3458,19 +3476,19 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 125,
+                                            lineNumber: 127,
                                             columnNumber: 20
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 126,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
                                     id: "name",
                                     name: "name",
-                                    value: formik.values.name,
+                                    value: formik.values.name ?? "",
                                     onChange: formik.handleChange,
                                     onBlur: formik.handleBlur,
                                     placeholder: "Enter student name",
@@ -3478,7 +3496,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 127,
+                                    lineNumber: 129,
                                     columnNumber: 13
                                 }, this),
                                 formik.touched.name && formik.errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3486,13 +3504,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: formik.errors.name
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 142,
+                                    lineNumber: 144,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 123,
+                            lineNumber: 125,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3507,20 +3525,20 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 147,
+                                            lineNumber: 149,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 146,
+                                    lineNumber: 148,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
                                     id: "email",
                                     name: "email",
                                     type: "email",
-                                    value: formik.values.email,
+                                    value: formik.values.email ?? "",
                                     onChange: formik.handleChange,
                                     onBlur: formik.handleBlur,
                                     placeholder: "Enter email address",
@@ -3528,7 +3546,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 151,
                                     columnNumber: 13
                                 }, this),
                                 formik.touched.email && formik.errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3536,63 +3554,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: formik.errors.email
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 165,
+                                    lineNumber: 167,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 145,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "space-y-2",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                    htmlFor: "password",
-                                    children: [
-                                        "Password ",
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-red-500",
-                                            children: "*"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 170,
-                                            columnNumber: 24
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 169,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
-                                    id: "password",
-                                    name: "password",
-                                    type: "password",
-                                    value: formik.values.password,
-                                    onChange: formik.handleChange,
-                                    onBlur: formik.handleBlur,
-                                    placeholder: "Enter password",
-                                    className: formik.touched.password && formik.errors.password ? "border-red-500" : "",
-                                    disabled: isLoading
-                                }, void 0, false, {
-                                    fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 172,
-                                    columnNumber: 13
-                                }, this),
-                                formik.touched.password && formik.errors.password && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-sm text-red-500",
-                                    children: formik.errors.password
-                                }, void 0, false, {
-                                    fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 188,
-                                    columnNumber: 15
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 168,
+                            lineNumber: 147,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3607,20 +3575,20 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                             children: "*"
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 193,
+                                            lineNumber: 172,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 192,
+                                    lineNumber: 171,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
                                     id: "phone",
                                     name: "phone",
                                     type: "tel",
-                                    value: formik.values.phone,
+                                    value: formik.values.phone ?? "",
                                     onChange: formik.handleChange,
                                     onBlur: formik.handleBlur,
                                     placeholder: "Enter phone number",
@@ -3628,7 +3596,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     disabled: isLoading
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 195,
+                                    lineNumber: 174,
                                     columnNumber: 13
                                 }, this),
                                 formik.touched.phone && formik.errors.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3636,13 +3604,13 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: formik.errors.phone
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 211,
+                                    lineNumber: 190,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 191,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dayjs$2d$datetime$2d$picker$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DateTimePicker"], {
@@ -3656,7 +3624,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                             showTime: false
                         }, void 0, false, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 214,
+                            lineNumber: 193,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3666,7 +3634,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: "Assigned Courses"
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 229,
+                                    lineNumber: 208,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Select"], {
@@ -3682,12 +3650,12 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                 placeholder: `Select courses (${formik.values.enrollCourses?.length || 0} selected)`
                                             }, void 0, false, {
                                                 fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                lineNumber: 239,
+                                                lineNumber: 218,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 238,
+                                            lineNumber: 217,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -3700,7 +3668,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                                 children: assignedCourse.course.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                                lineNumber: 252,
+                                                                lineNumber: 231,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3712,30 +3680,30 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                                lineNumber: 253,
+                                                                lineNumber: 232,
                                                                 columnNumber: 23
                                                             }, this),
                                                             formik.values.enrollCourses?.includes(assignedCourse.course.id) && " ✓"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                        lineNumber: 251,
+                                                        lineNumber: 230,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, index, false, {
                                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                    lineNumber: 247,
+                                                    lineNumber: 226,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 245,
+                                            lineNumber: 224,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 230,
+                                    lineNumber: 209,
                                     columnNumber: 13
                                 }, this),
                                 formik.values.enrollCourses && formik.values.enrollCourses.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3749,7 +3717,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                     children: assignedCourse.course.name
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                    lineNumber: 277,
+                                                    lineNumber: 256,
                                                     columnNumber: 27
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3761,7 +3729,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                    lineNumber: 278,
+                                                    lineNumber: 257,
                                                     columnNumber: 27
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3771,25 +3739,25 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                     children: "×"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                    lineNumber: 281,
+                                                    lineNumber: 260,
                                                     columnNumber: 27
                                                 }, this)
                                             ]
                                         }, courseId, true, {
                                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                                            lineNumber: 273,
+                                            lineNumber: 252,
                                             columnNumber: 25
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 245,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 228,
+                            lineNumber: 207,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -3802,7 +3770,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 296,
+                                    lineNumber: 275,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -3814,7 +3782,7 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                                 className: "h-4 w-4 mr-2 animate-spin"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/modals/create-student-modal.tsx",
-                                                lineNumber: 307,
+                                                lineNumber: 286,
                                                 columnNumber: 19
                                             }, this),
                                             "Creating..."
@@ -3822,30 +3790,30 @@ function CreateStudentModal({ isOpen, onClose, onStudentCreated }) {
                                     }, void 0, true) : "Create Student"
                                 }, void 0, false, {
                                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                                    lineNumber: 304,
+                                    lineNumber: 283,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modals/create-student-modal.tsx",
-                            lineNumber: 295,
+                            lineNumber: 274,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/modals/create-student-modal.tsx",
-                    lineNumber: 122,
+                    lineNumber: 124,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/modals/create-student-modal.tsx",
-            lineNumber: 106,
+            lineNumber: 108,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/modals/create-student-modal.tsx",
-        lineNumber: 105,
+        lineNumber: 107,
         columnNumber: 5
     }, this);
 }
@@ -4304,8 +4272,8 @@ function BulkUploadModal({ isOpen, onClose, onBulkUploadComplete }) {
                                             children: [
                                                 course.course.name,
                                                 " (",
-                                                course.course.id,
-                                                ")"
+                                                course.remainingToken,
+                                                " Tokens)"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/modals/bulk-upload-modal.tsx",

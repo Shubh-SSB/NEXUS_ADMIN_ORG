@@ -76,7 +76,6 @@ const courseAssignValidations = {
 const createStudentValidations = {
   name: SCHEMA.name,
   email: SCHEMA.email,
-  password: yup.string().required("Password is required"),
   phone: yup
     .string()
     .required("Phone is required")
@@ -91,14 +90,10 @@ const updateStudentValidations = {
   phone: yup
     .string()
     .nullable()
-    .test(
-      "phone-valid",
-      "Phone number must be exactly 10 digits",
-      (value) => {
-        if (!value || value.trim() === "") return true;
-        return phoneRegExp.test(value);
-      }
-    ),
+    .test("phone-valid", "Phone number must be exactly 10 digits", (value) => {
+      if (!value || value.trim() === "") return true;
+      return phoneRegExp.test(value);
+    }),
   dob: yup.string().nullable(),
 };
 

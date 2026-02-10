@@ -61,6 +61,7 @@ export function CreateStudentModal({
     },
     validationSchema: validationSchema("createStudent"),
     onSubmit: async (values) => {
+      console.log("Form submitted with values:", values);
       setIsLoading(true);
 
       const cleanData: CreateStudentData = {
@@ -72,7 +73,8 @@ export function CreateStudentModal({
       };
 
       try {
-        await StudentsService.createStudent(cleanData);
+        const result = await StudentsService.createStudent(cleanData);
+        console.log("API call successful:", result);
         // Call the success callback if provided
         onStudentCreated?.();
         handleClose();
@@ -127,7 +129,7 @@ export function CreateStudentModal({
             <Input
               id="name"
               name="name"
-              value={formik.values.name}
+              value={formik.values.name ?? ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Enter student name"
@@ -150,7 +152,7 @@ export function CreateStudentModal({
               id="email"
               name="email"
               type="email"
-              value={formik.values.email}
+              value={formik.values.email ?? ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Enter email address"
@@ -173,7 +175,7 @@ export function CreateStudentModal({
               id="phone"
               name="phone"
               type="tel"
-              value={formik.values.phone}
+              value={formik.values.phone ?? ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Enter phone number"
