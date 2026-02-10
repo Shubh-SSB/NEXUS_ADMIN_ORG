@@ -61,7 +61,6 @@ export function CreateStudentModal({
     },
     validationSchema: validationSchema("createStudent"),
     onSubmit: async (values) => {
-      // let isSuccess = false;
       setIsLoading(true);
 
       const cleanData: CreateStudentData = {
@@ -74,17 +73,20 @@ export function CreateStudentModal({
 
       try {
         await StudentsService.createStudent(cleanData);
+        // Call the success callback if provided
+        onStudentCreated?.();
         handleClose();
-        // isSuccess = true;
       } catch (error) {
+        console.error("Error creating student:", error);
+        // You might want to show an error message to the user here
       } finally {
+        setIsLoading(false);
       }
     },
   });
 
   const handleClose = useCallback(() => {
     if (!isLoading) {
-      setIsLoading(false);
       formik.resetForm();
       setSelectValue("");
       onClose();
